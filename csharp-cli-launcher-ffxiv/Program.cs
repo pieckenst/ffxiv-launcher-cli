@@ -62,6 +62,18 @@ namespace csharp_cli_launcher_ffxiv
             Console.Write("Please enter your gamepath - ");
             string gamePath = Console.ReadLine();
             Console.WriteLine("-------------------------------------");
+            bool isSteam = false;
+            Console.Write("Is your game a steam version of the client? - ");
+            string promtw = Console.ReadLine();
+            if (promtw.ToLower() == "yes")
+            {
+                isSteam = true;
+            }
+            else
+            {
+                isSteam = false;
+            }
+            Console.WriteLine("-------------------------------------");
             Console.Write("Username - ");
             string username = Console.ReadLine();
             //Console.WriteLine("Provided username {0}", username);
@@ -80,7 +92,7 @@ namespace csharp_cli_launcher_ffxiv
             string otp = Console.ReadLine();
             Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
             int expansionLevel = int.Parse(Console.ReadLine());
-            bool isSteam = false;
+            
             try
             {
                 var sid = GetRealSid(gamePath,username, password, otp, isSteam);
