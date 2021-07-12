@@ -55,59 +55,78 @@ namespace csharp_cli_launcher_ffxiv
 
         static void Main(string[] args)
         {
-            Console.Title = "FFXIV cli launcher";
+            Console.Title = "XIVLOADER";
             Console.WriteLine("FFXIV Launcher "); // it has to begin somewhere lol
+            
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("What would you like to do?");
+            Console.WriteLine("  1) Login");
+            Console.WriteLine("  2) Exit");
 
-            Console.WriteLine("-------------------------------------");
-            Console.Write("Please enter your gamepath - ");
-            string gamePath = Console.ReadLine();
-            Console.WriteLine("-------------------------------------");
-            bool isSteam = false;
-            Console.Write("Is your game a steam version of the client? - ");
-            string promtw = Console.ReadLine();
-            if (promtw.ToLower() == "yes")
-            {
-                isSteam = true;
-            }
-            else
-            {
-                isSteam = false;
-            }
-            Console.WriteLine("-------------------------------------");
-            Console.Write("Username - ");
-            string username = Console.ReadLine();
-            //Console.WriteLine("Provided username {0}", username);
-            Console.Write("Password - ");
-            string password = ReadPassword();
-            //string maskpassword = "";
-            //for (int i = 0; i < password.Length; i++) { 
-                //maskpassword += "*"; 
-            //}
-               
-
-            //Console.Write("Your Password is:" + maskpassword);
+            Console.Write("Input - ");
+            var ansys = Console.ReadKey();
             Console.WriteLine();
+            Console.WriteLine("-------------------------------------");
             
-            Console.Write("Two-Factor Authefication Key - ");
-            string otp = Console.ReadLine();
-            Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
-            int expansionLevel = int.Parse(Console.ReadLine());
-            
-            try
+            if (ansys.KeyChar == '1')
             {
-                var sid = GetRealSid(gamePath,username, password, otp, isSteam);
-                if (sid.Equals("BAD"))
-                    return;
+                //Console.WriteLine("-------------------------------------");
+                Console.WriteLine();
+                Console.Write("Please enter your gamepath - ");
+                string gamePath = Console.ReadLine();
+                Console.WriteLine("-------------------------------------");
+                bool isSteam = false;
+                Console.Write("Is your game a steam version of the client? - ");
+                string promtw = Console.ReadLine();
+                if (promtw.ToLower() == "yes")
+                {
+                    isSteam = true;
+                }
+                else
+                {
+                    isSteam = false;
+                }
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Username - ");
+                string username = Console.ReadLine();
+                //Console.WriteLine("Provided username {0}", username);
+                Console.Write("Password - ");
+                string password = ReadPassword();
+                //string maskpassword = "";
+                //for (int i = 0; i < password.Length; i++) { 
+                //maskpassword += "*"; 
+                //}
 
-                var ffxivGame = LaunchGame(gamePath,sid, 1, true, expansionLevel, isSteam);
+
+                //Console.Write("Your Password is:" + maskpassword);
+                Console.WriteLine();
+
+                Console.Write("Two-Factor Authefication Key - ");
+                string otp = Console.ReadLine();
+                Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                int expansionLevel = int.Parse(Console.ReadLine());
+
+                try
+                {
+                    var sid = GetRealSid(gamePath, username, password, otp, isSteam);
+                    if (sid.Equals("BAD"))
+                        return;
+
+                    var ffxivGame = LaunchGame(gamePath, sid, 1, true, expansionLevel, isSteam);
 
 
-                
+
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
+                }
             }
-            catch (Exception exc)
-            {
-                Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
-            }
+            else {
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("Exiting the launcher");
+                Console.WriteLine("-------------------------------------");
+            }    
 
         }
 
