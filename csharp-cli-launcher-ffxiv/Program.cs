@@ -19,8 +19,43 @@ namespace csharp_cli_launcher_ffxiv
 
         private static readonly string UserAgent = GenerateUserAgent();
 
+        public static string ReadPassword()
+        {
+            string password = "";
+            ConsoleKeyInfo info = Console.ReadKey(true);
+            while (info.Key != ConsoleKey.Enter)
+            {
+                if (info.Key != ConsoleKey.Backspace)
+                {
+                    Console.Write("*");
+                    password += info.KeyChar;
+                }
+                else if (info.Key == ConsoleKey.Backspace)
+                {
+                    if (!string.IsNullOrEmpty(password))
+                    {
+                        // remove one character from the list of password characters
+                        password = password.Substring(0, password.Length - 1);
+                        // get the location of the cursor
+                        int pos = Console.CursorLeft;
+                        // move the cursor to the left by one character
+                        Console.SetCursorPosition(pos - 1, Console.CursorTop);
+                        // replace it with space
+                        Console.Write(" ");
+                        // move the cursor to the left by one character again
+                        Console.SetCursorPosition(pos - 1, Console.CursorTop);
+                    }
+                }
+                info = Console.ReadKey(true);
+            }
+            // add a new line because user pressed enter at the end of their password
+            Console.WriteLine();
+            return password;
+        }
+
         static void Main(string[] args)
         {
+            Console.Title = "FFXIV cli launcher";
             Console.WriteLine("FFXIV Launcher "); // it has to begin somewhere lol
 
             Console.WriteLine("-------------------------------------");
@@ -31,13 +66,20 @@ namespace csharp_cli_launcher_ffxiv
             string username = Console.ReadLine();
             Console.WriteLine("Provided username {0}", username);
             Console.WriteLine("Please enter your password");
-            string password = Console.ReadLine();
-            Console.WriteLine("Provided password {0}", password);
+            string password = ReadPassword();
+            string maskpassword = "";
+            for (int i = 0; i < password.Length; i++) { 
+                maskpassword += "*"; 
+            }
+               
+
+            Console.Write("Your Password is:" + maskpassword);
+            Console.WriteLine();
             Console.WriteLine("Do you have a otp enabled on your square enix account?");
             
             Console.WriteLine("Please enter your otp key");
             string otp = Console.ReadLine();
-            Console.WriteLine("Please enter your expansion pack level - Currently valid ones are - 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+            Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
             int expansionLevel = int.Parse(Console.ReadLine());
             bool isSteam = false;
             try
@@ -55,6 +97,7 @@ namespace csharp_cli_launcher_ffxiv
             {
                 Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
             }
+
         }
 
         public static Process LaunchGame(string gamePath, string realsid, int language, bool dx11, int expansionlevel, bool isSteam)
@@ -160,7 +203,7 @@ namespace csharp_cli_launcher_ffxiv
                         });
 
                     string reply = System.Text.Encoding.UTF8.GetString(response);
-                    Console.WriteLine(reply);
+                    //Console.WriteLine(reply);
                     Regex sidre = new Regex(@"sid,(?<sid>.*),terms");
                     var matches = sidre.Matches(reply);
                     if (matches.Count == 0)
