@@ -58,6 +58,12 @@ namespace csharp_cli_launcher_ffxiv
             Console.Title = "XIVLOADER";
             Console.WriteLine("FFXIV Launcher "); // it has to begin somewhere lol
             
+            
+            
+            Console.WriteLine("0 - Japanese , 1 - English , 2 - German , 3 - French");
+            
+            Console.Write("Enter your language - ");
+            
             int language = int.Parse(Console.ReadLine());
 
             if ( language == 0 ) {
