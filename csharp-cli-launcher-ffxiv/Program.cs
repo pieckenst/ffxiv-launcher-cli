@@ -61,33 +61,92 @@ namespace csharp_cli_launcher_ffxiv
             int language = int.Parse(Console.ReadLine());
 
             if ( language == 0 ) {
+             Console.WriteLine("-------------------------------------");
+             Console.WriteLine("何をしたいですか?");
+             Console.WriteLine("  1) ログイン");
+             Console.WriteLine("  2) 出口");
 
+             Console.Write("入力 - ");
+             var ansys = Console.ReadKey();
+             Console.WriteLine();
+             Console.WriteLine("-------------------------------------");
+            
+             if (ansys.KeyChar == '1')
+             {
+                //Console.WriteLine("-------------------------------------");
+                Console.WriteLine();
+                Console.Write("ゲームパスを入力してください - ");
+                string gamePath = Console.ReadLine();
+                Console.WriteLine("-------------------------------------");
+                bool isSteam = false;
+                Console.Write("あなたのゲームはクライアントのSteamバージョンですか? - ");
+                string promtw = Console.ReadLine();
+                if (promtw.ToLower() == "yes")
+                {
+                    isSteam = true;
+                }
+                else
+                {
+                    isSteam = false;
+                }
+                Console.WriteLine("-------------------------------------");
+                Console.Write("ユーザーID - ");
+                string username = Console.ReadLine();
+                //Console.WriteLine("Provided username {0}", username);
+                Console.Write("パスワード - ");
+                string password = ReadPassword();
+                //string maskpassword = "";
+                //for (int i = 0; i < password.Length; i++) { 
+                //maskpassword += "*"; 
+                //}
+
+
+                //Console.Write("Your Password is:" + maskpassword);
+                Console.WriteLine();
+
+                Console.Write("2要素認証キ - ");
+                string otp = Console.ReadLine();
+                Console.WriteLine("拡張パックのレベルを入力してください-現在有効なものは \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
+                int expansionLevel = int.Parse(Console.ReadLine());
+
+                try
+                {
+                    var sid = GetRealSid(gamePath, username, password, otp, isSteam);
+                    if (sid.Equals("BAD"))
+                        return;
+
+                    var ffxivGame = LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
+
+
+
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("ログインに失敗しました。ログイン情報を確認するか、再試行してください.\n" + exc.Message);
+                }
+                Console.ReadLine();
+             }
+             else {
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("ランチャーを終了する");
+                Console.WriteLine("-------------------------------------");
+                Console.ReadLine();
+             }    
             }
 
             if ( language == 1 ) {
+             Console.WriteLine("-------------------------------------");
+             Console.WriteLine("What would you like to do?");
+             Console.WriteLine("  1) Login");
+             Console.WriteLine("  2) Exit");
 
-            }
-
-            if ( language == 2 ) {
-
-            }
-
-            if ( language == 3 ) {
-
-            }
-
-            Console.WriteLine("-------------------------------------");
-            Console.WriteLine("What would you like to do?");
-            Console.WriteLine("  1) Login");
-            Console.WriteLine("  2) Exit");
-
-            Console.Write("Input - ");
-            var ansys = Console.ReadKey();
-            Console.WriteLine();
-            Console.WriteLine("-------------------------------------");
+             Console.Write("Input - ");
+             var ansys = Console.ReadKey();
+             Console.WriteLine();
+             Console.WriteLine("-------------------------------------");
             
-            if (ansys.KeyChar == '1')
-            {
+             if (ansys.KeyChar == '1')
+             {
                 //Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
                 Console.Write("Please enter your gamepath - ");
@@ -130,7 +189,7 @@ namespace csharp_cli_launcher_ffxiv
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = LaunchGame(gamePath, sid, 1, true, expansionLevel, isSteam);
+                    var ffxivGame = LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
 
 
 
@@ -140,140 +199,25 @@ namespace csharp_cli_launcher_ffxiv
                     Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
                 }
                 Console.ReadLine();
-            }
-            else {
+             }
+             else {
                 Console.WriteLine("-------------------------------------");
                 Console.WriteLine("Exiting the launcher");
                 Console.WriteLine("-------------------------------------");
                 Console.ReadLine();
-            }    
-
-        }
-
-        public static Process LaunchGame(string gamePath, string realsid, int language, bool dx11, int expansionlevel, bool isSteam)
-        {
-            try
-            {
-                Process ffxivgame = new Process();
-                ffxivgame.StartInfo.FileName = gamePath + "/game/ffxiv_dx11.exe";
-                ffxivgame.StartInfo.Arguments = $"DEV.TestSID={realsid} DEV.MaxEntitledExpansionID={expansionlevel} language={language} region=3";
-                if (isSteam)
-                {
-                    ffxivgame.StartInfo.Environment.Add("IS_FFXIV_LAUNCH_FROM_STEAM", "1");
-                    ffxivgame.StartInfo.Arguments += " IsSteam=1";
-                    ffxivgame.StartInfo.UseShellExecute = false;
-                }
-                ffxivgame.Start();
-                return ffxivgame;
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine("Could not launch executable. Is your game path correct? " + exc);
+             }    
             }
 
-            return null;
-        }
+            if ( language == 2 ) {
 
-        public static string GetRealSid(string gamePath, string username, string password, string otp, bool isSteam)
-        {
-            string hashstr = "";
-            try
-            {
-                // make the string of hashed files to prove game version//make the string of hashed files to prove game version
-                hashstr = "ffxivboot.exe/" + GenerateHash(gamePath + "/boot/ffxivboot.exe") +
-                          ",ffxivboot64.exe/" + GenerateHash(gamePath + "/boot/ffxivboot64.exe") +
-                          ",ffxivlauncher.exe/" + GenerateHash(gamePath + "/boot/ffxivlauncher.exe") +
-                          ",ffxivlauncher64.exe/" + GenerateHash(gamePath + "/boot/ffxivlauncher64.exe") +
-                          ",ffxivupdater.exe/" + GenerateHash(gamePath + "/boot/ffxivupdater.exe") +
-                          ",ffxivupdater64.exe/" + GenerateHash(gamePath + "/boot/ffxivupdater64.exe");
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine("Could not generate hashes. Is your game path correct? " + exc);
             }
 
-            WebClient sidClient = new WebClient();
-            sidClient.Headers.Add("X-Hash-Check", "enabled");
-            sidClient.Headers.Add("user-agent", UserAgent);
-            sidClient.Headers.Add("Referer", "https://ffxiv-login.square-enix.com/oauth/ffxivarr/login/top?lng=en&rgn=3");
-            sidClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            if ( language == 3 ) {
 
-            InitiateSslTrust();
-
-            try
-            {
-                var localGameVer = GetLocalGamever(gamePath);
-                var localSid = GetSid(username, password, otp, isSteam);
-
-                if (localGameVer.Equals("BAD") || localSid.Equals("BAD"))
-                {
-                    return "BAD";
-                }
-
-                var url = "https://patch-gamever.ffxiv.com/http/win32/ffxivneo_release_game/" + localGameVer + "/" + localSid;
-                sidClient.UploadString(url, hashstr); //request real session id
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine($"Unable to retrieve a session ID from the server.\n" + exc);
             }
 
-            return sidClient.ResponseHeaders["X-Patch-Unique-Id"];
-        }
+            
 
-        private static string GetStored(bool isSteam) //this is needed to be able to access the login site correctly
-        {
-            WebClient loginInfo = new WebClient();
-            loginInfo.Headers.Add("user-agent", UserAgent);
-            string reply = loginInfo.DownloadString(string.Format("https://ffxiv-login.square-enix.com/oauth/ffxivarr/login/top?lng=en&rgn=3&isft=0&issteam={0}", isSteam ? 1 : 0));
-
-            Regex storedre = new Regex(@"\t<\s*input .* name=""_STORED_"" value=""(?<stored>.*)"">");
-
-            var stored = storedre.Matches(reply)[0].Groups["stored"].Value;
-            return stored;
-        }
-
-        public static string GetSid(string username, string password, string otp, bool isSteam)
-        {
-            using (WebClient loginData = new WebClient())
-            {
-                loginData.Headers.Add("user-agent", UserAgent);
-                loginData.Headers.Add("Referer", string.Format("https://ffxiv-login.square-enix.com/oauth/ffxivarr/login/top?lng=en&rgn=3&isft=0&issteam={0}", isSteam ? 1 : 0));
-                loginData.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-
-                try
-                {
-                    byte[] response =
-                        loginData.UploadValues("https://ffxiv-login.square-enix.com/oauth/ffxivarr/login/login.send", new NameValueCollection() //get the session id with user credentials
-                        {
-                            { "_STORED_", GetStored(isSteam) },
-                            { "sqexid", username },
-                            { "password", password },
-                            { "otppw", otp }
-                        });
-
-                    string reply = System.Text.Encoding.UTF8.GetString(response);
-                    //Console.WriteLine(reply);
-                    Regex sidre = new Regex(@"sid,(?<sid>.*),terms");
-                    var matches = sidre.Matches(reply);
-                    if (matches.Count == 0)
-                    {
-                        if (reply.Contains("ID or password is incorrect"))
-                        {
-                            Console.WriteLine("Incorrect username or password.");
-                            return "BAD";
-                        }
-                    }
-
-                    var sid = sidre.Matches(reply)[0].Groups["sid"].Value;
-                    return sid;
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine($"Something failed when attempting to request a session ID.\n" + exc);
-                    return "BAD";
-                }
-            }
         }
 
         private static string GetLocalGamever(string gamePath)
