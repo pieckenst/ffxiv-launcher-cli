@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -218,6 +218,132 @@ namespace csharp_cli_launcher_ffxiv
 
             
 
+        }
+
+        public static Process LaunchGame(string gamePath, string realsid, int language, bool dx11, int expansionlevel, bool isSteam)
+        {
+            try
+            {
+                Process ffxivgame = new Process();
+                ffxivgame.StartInfo.FileName = gamePath + "/game/ffxiv_dx11.exe";
+                ffxivgame.StartInfo.Arguments = $"DEV.TestSID={realsid} DEV.MaxEntitledExpansionID={expansionlevel} language={language} region=3";
+                if (isSteam)
+                {
+                    ffxivgame.StartInfo.Environment.Add("IS_FFXIV_LAUNCH_FROM_STEAM", "1");
+                    ffxivgame.StartInfo.Arguments += " IsSteam=1";
+                    ffxivgame.StartInfo.UseShellExecute = false;
+                }
+                ffxivgame.Start();
+                return ffxivgame;
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Could not launch executable. Is your game path correct? " + exc);
+            }
+
+            return null;
+        }
+
+        public static string GetRealSid(string gamePath, string username, string password, string otp, bool isSteam)
+        {
+            string hashstr = "";
+            try
+            {
+                // make the string of hashed files to prove game version//make the string of hashed files to prove game version
+                hashstr = "ffxivboot.exe/" + GenerateHash(gamePath + "/boot/ffxivboot.exe") +
+                          ",ffxivboot64.exe/" + GenerateHash(gamePath + "/boot/ffxivboot64.exe") +
+                          ",ffxivlauncher.exe/" + GenerateHash(gamePath + "/boot/ffxivlauncher.exe") +
+                          ",ffxivlauncher64.exe/" + GenerateHash(gamePath + "/boot/ffxivlauncher64.exe") +
+                          ",ffxivupdater.exe/" + GenerateHash(gamePath + "/boot/ffxivupdater.exe") +
+                          ",ffxivupdater64.exe/" + GenerateHash(gamePath + "/boot/ffxivupdater64.exe");
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Could not generate hashes. Is your game path correct? " + exc);
+            }
+
+            WebClient sidClient = new WebClient();
+            sidClient.Headers.Add("X-Hash-Check", "enabled");
+            sidClient.Headers.Add("user-agent", UserAgent);
+            sidClient.Headers.Add("Referer", "https://ffxiv-login.square-enix.com/oauth/ffxivarr/login/top?lng=en&rgn=3");
+            sidClient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+            InitiateSslTrust();
+
+            try
+            {
+                var localGameVer = GetLocalGamever(gamePath);
+                var localSid = GetSid(username, password, otp, isSteam);
+
+                if (localGameVer.Equals("BAD") || localSid.Equals("BAD"))
+                {
+                    return "BAD";
+                }
+
+                var url = "https://patch-gamever.ffxiv.com/http/win32/ffxivneo_release_game/" + localGameVer + "/" + localSid;
+                sidClient.UploadString(url, hashstr); //request real session id
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine($"Unable to retrieve a session ID from the server.\n" + exc);
+            }
+
+            return sidClient.ResponseHeaders["X-Patch-Unique-Id"];
+        }
+
+        private static string GetStored(bool isSteam) //this is needed to be able to access the login site correctly
+        {
+            WebClient loginInfo = new WebClient();
+            loginInfo.Headers.Add("user-agent", UserAgent);
+            string reply = loginInfo.DownloadString(string.Format("https://ffxiv-login.square-enix.com/oauth/ffxivarr/login/top?lng=en&rgn=3&isft=0&issteam={0}", isSteam ? 1 : 0));
+
+            Regex storedre = new Regex(@"\t<\s*input .* name=""_STORED_"" value=""(?<stored>.*)"">");
+
+            var stored = storedre.Matches(reply)[0].Groups["stored"].Value;
+            return stored;
+        }
+
+        public static string GetSid(string username, string password, string otp, bool isSteam)
+        {
+            using (WebClient loginData = new WebClient())
+            {
+                loginData.Headers.Add("user-agent", UserAgent);
+                loginData.Headers.Add("Referer", string.Format("https://ffxiv-login.square-enix.com/oauth/ffxivarr/login/top?lng=en&rgn=3&isft=0&issteam={0}", isSteam ? 1 : 0));
+                loginData.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+                try
+                {
+                    byte[] response =
+                        loginData.UploadValues("https://ffxiv-login.square-enix.com/oauth/ffxivarr/login/login.send", new NameValueCollection() //get the session id with user credentials
+                        {
+                            { "_STORED_", GetStored(isSteam) },
+                            { "sqexid", username },
+                            { "password", password },
+                            { "otppw", otp }
+                        });
+
+                    string reply = System.Text.Encoding.UTF8.GetString(response);
+                    //Console.WriteLine(reply);
+                    Regex sidre = new Regex(@"sid,(?<sid>.*),terms");
+                    var matches = sidre.Matches(reply);
+                    if (matches.Count == 0)
+                    {
+                        if (reply.Contains("ID or password is incorrect"))
+                        {
+                            Console.WriteLine("Incorrect username or password.");
+                            return "BAD";
+                        }
+                    }
+
+                    var sid = sidre.Matches(reply)[0].Groups["sid"].Value;
+                    return sid;
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine($"Something failed when attempting to request a session ID.\n" + exc);
+                    return "BAD";
+                }
+            }
         }
 
         private static string GetLocalGamever(string gamePath)
