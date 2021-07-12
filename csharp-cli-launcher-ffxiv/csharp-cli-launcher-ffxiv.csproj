@@ -12,10 +12,20 @@
 Distibuted under Eclipse Public License 2.0</Description>
     <PackageIcon>bigicon.png</PackageIcon>
     <PackageIconUrl />
+    <PackageId>ffxiv-launcher</PackageId>
+    <PackageProjectUrl>https://github.com/pieckenst/ffxiv-launcher-cli</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pieckenst/ffxiv-launcher-cli.git</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\bigicon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\LICENSE.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

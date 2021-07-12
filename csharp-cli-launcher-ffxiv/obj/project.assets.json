@@ -16,7 +16,7 @@
     "version": "0.1.1",
     "restore": {
       "projectUniqueName": "C:\\Users\\Andrey Savich\\source\\repos\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv.csproj",
-      "projectName": "csharp-cli-launcher-ffxiv",
+      "projectName": "ffxiv-launcher",
       "projectPath": "C:\\Users\\Andrey Savich\\source\\repos\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv.csproj",
       "packagesPath": "C:\\Users\\Andrey Savich\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Andrey Savich\\source\\repos\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv\\obj\\",
