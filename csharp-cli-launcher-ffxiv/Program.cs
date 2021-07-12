@@ -56,7 +56,21 @@ namespace csharp_cli_launcher_ffxiv
         static void Main(string[] args)
         {
             Console.Title = "XIVLOADER";
-            Console.WriteLine("FFXIV Launcher "); // it has to begin somewhere lol
+            var arr = new[]
+            {
+                @"                                             ",
+                @"   __  _______   ___                 _         ",
+                @"  \ \/ /_ _\ \ / / |   ___  __ _ __| |___ _ _ ",
+                @"   >  < | | \ V /| |__/ _ \/ _` / _` / -_) '_| ",
+                @" /_/\_\___| \_/ |____\___/\__,_\__,_\___|_|  ",
+                @"                                             ",
+            };
+            Console.WindowWidth = 160;
+            Console.WriteLine("\n\n");
+            foreach(string line in arr ) {
+                Console.WriteLine(line);
+            }
+            //Console.WriteLine("FFXIV Launcher "); // it has to begin somewhere lol
             
             
             
