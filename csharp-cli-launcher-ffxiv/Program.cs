@@ -59,25 +59,24 @@ namespace csharp_cli_launcher_ffxiv
             Console.WriteLine("FFXIV Launcher "); // it has to begin somewhere lol
 
             Console.WriteLine("-------------------------------------");
-            Console.WriteLine("Please enter your gamepath");
+            Console.Write("Please enter your gamepath - ");
             string gamePath = Console.ReadLine();
             Console.WriteLine("-------------------------------------");
-            Console.WriteLine("Please enter your username");
+            Console.Write("Username - ");
             string username = Console.ReadLine();
-            Console.WriteLine("Provided username {0}", username);
-            Console.WriteLine("Please enter your password");
+            //Console.WriteLine("Provided username {0}", username);
+            Console.Write("Password - ");
             string password = ReadPassword();
-            string maskpassword = "";
-            for (int i = 0; i < password.Length; i++) { 
-                maskpassword += "*"; 
-            }
+            //string maskpassword = "";
+            //for (int i = 0; i < password.Length; i++) { 
+                //maskpassword += "*"; 
+            //}
                
 
-            Console.Write("Your Password is:" + maskpassword);
+            //Console.Write("Your Password is:" + maskpassword);
             Console.WriteLine();
-            Console.WriteLine("Do you have a otp enabled on your square enix account?");
             
-            Console.WriteLine("Please enter your otp key");
+            Console.Write("Two-Factor Authefication Key - ");
             string otp = Console.ReadLine();
             Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
             int expansionLevel = int.Parse(Console.ReadLine());
