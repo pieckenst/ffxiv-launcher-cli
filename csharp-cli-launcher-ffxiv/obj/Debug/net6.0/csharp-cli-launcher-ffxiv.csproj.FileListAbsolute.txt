@@ -1,0 +1,15 @@
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\csharp-cli-launcher-ffxiv.exe
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\csharp-cli-launcher-ffxiv.deps.json
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\csharp-cli-launcher-ffxiv.runtimeconfig.json
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\csharp-cli-launcher-ffxiv.dll
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\ref\csharp-cli-launcher-ffxiv.dll
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\csharp-cli-launcher-ffxiv.pdb
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.csproj.AssemblyReference.cache
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.AssemblyInfoInputs.cache
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.AssemblyInfo.cs
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.csproj.CoreCompileInputs.cache
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.dll
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\ref\csharp-cli-launcher-ffxiv.dll
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.pdb
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.genruntimeconfig.cache
