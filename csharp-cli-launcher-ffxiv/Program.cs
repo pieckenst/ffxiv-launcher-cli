@@ -121,11 +121,13 @@ namespace csharp_cli_launcher_ffxiv
                 {
                     Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
                 }
+                Console.ReadLine();
             }
             else {
                 Console.WriteLine("-------------------------------------");
                 Console.WriteLine("Exiting the launcher");
                 Console.WriteLine("-------------------------------------");
+                Console.ReadLine();
             }    
 
         }
