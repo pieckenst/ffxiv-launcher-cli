@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "csharp-cli-launcher-ffxiv/1.0.0": {
+      "csharp-cli-launcher-ffxiv/0.1.1": {
         "runtime": {
           "csharp-cli-launcher-ffxiv.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "csharp-cli-launcher-ffxiv/1.0.0": {
+    "csharp-cli-launcher-ffxiv/0.1.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

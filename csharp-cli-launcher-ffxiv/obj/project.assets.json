@@ -13,7 +13,7 @@
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "0.1.1",
     "restore": {
       "projectUniqueName": "C:\\Users\\Andrey Savich\\source\\repos\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv.csproj",
       "projectName": "csharp-cli-launcher-ffxiv",
