@@ -18,6 +18,7 @@ Distibuted under Eclipse Public License 2.0</Description>
     <RepositoryType>GIT</RepositoryType>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <AssemblyName>xivloader</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

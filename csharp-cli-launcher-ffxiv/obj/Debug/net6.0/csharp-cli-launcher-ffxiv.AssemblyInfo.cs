@@ -17,8 +17,8 @@ using System.Reflection;
     "ibuted under Eclipse Public License 2.0")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.1.1.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.1")]
-[assembly: System.Reflection.AssemblyProductAttribute("csharp-cli-launcher-ffxiv")]
-[assembly: System.Reflection.AssemblyTitleAttribute("csharp-cli-launcher-ffxiv")]
+[assembly: System.Reflection.AssemblyProductAttribute("xivloader")]
+[assembly: System.Reflection.AssemblyTitleAttribute("xivloader")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.1.1.0")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/pieckenst/ffxiv-launcher-cli.git")]
 
