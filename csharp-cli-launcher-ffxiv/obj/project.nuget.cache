@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J8Vgs/74rWESyFEvZjH6v+Pj+of4eyzINfPKK2EOigCfOEv3pnL1CeH6AHCF5uCNQSysdk87JY1zIldiELQTPQ==",
+  "dgSpecHash": "wZ/sXKnnC8iC0QhILps9bnl9myxctp29Sn2kkfpzemTOtCys4bY6n6o9ouPWybAEe1ZAn+GUFW+NrQvz+9ofUQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Andrey Savich\\source\\repos\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Andrey Savich\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.5\\microsoft.netcore.app.host.win-x64.5.0.5.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
