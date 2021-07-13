@@ -76,7 +76,7 @@ namespace csharp_cli_launcher_ffxiv
             
             
             
-            Console.WriteLine("0 - Japanese , 1 - English , 2 - German , 3 - French");
+            Console.WriteLine("0 - Japanese , 1 - English , 2 - German , 3 - French , 4 - Russian ( The client will still be in english)");
             
             Console.Write("Enter your language - ");
             
@@ -377,6 +377,81 @@ namespace csharp_cli_launcher_ffxiv
                 Console.ReadLine();
              }    
             }
+            if (language == 4)
+            {
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("Что бы вы хотели сделать?");
+                Console.WriteLine("  1) Вход в игру");
+                Console.WriteLine("  2) Выйти из лаунчера");
+
+                Console.Write("Ввод - ");
+                var ansys = Console.ReadKey();
+                Console.WriteLine();
+                Console.WriteLine("-------------------------------------");
+
+                if (ansys.KeyChar == '1')
+                {
+                    //Console.WriteLine("-------------------------------------");
+                    Console.WriteLine();
+                    Console.Write("Введите путь до клиента игры - ");
+                    string gamePath = Console.ReadLine();
+                    Console.WriteLine("-------------------------------------");
+                    bool isSteam = false;
+                    Console.Write("Является ли ваш клиент версией клиента для Steam? - ");
+                    string promtw = Console.ReadLine();
+                    if (promtw.ToLower() == "yes")
+                    {
+                        isSteam = true;
+                    }
+                    else
+                    {
+                        isSteam = false;
+                    }
+                    Console.WriteLine("-------------------------------------");
+                    Console.Write("Имя пользователя - ");
+                    string username = Console.ReadLine();
+                    //Console.WriteLine("Provided username {0}", username);
+                    Console.Write("Пароль - ");
+                    string password = ReadPassword();
+                    //string maskpassword = "";
+                    //for (int i = 0; i < password.Length; i++) { 
+                    //maskpassword += "*"; 
+                    //}
+
+
+                    //Console.Write("Your Password is:" + maskpassword);
+                    Console.WriteLine();
+
+                    Console.Write("Код Двух-Факторной аутентификации - ");
+                    string otp = Console.ReadLine();
+                    Console.WriteLine("Пожалуйста, введите уровень доступного вам дополнения - на текущий момент валидными являются следущие \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                    int expansionLevel = int.Parse(Console.ReadLine());
+
+                    try
+                    {
+                        var sid = GetRealSid(gamePath, username, password, otp, isSteam);
+                        if (sid.Equals("BAD"))
+                            return;
+
+                        var ffxivGame = LaunchGame(gamePath, sid, 1, true, expansionLevel, isSteam);
+
+
+
+                    }
+                    catch (Exception exc)
+                    {
+                        Console.WriteLine("Не удалось войти в систему, проверьте данные для входа или попробуйте еще раз .\n" + exc.Message);
+                    }
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("-------------------------------------");
+                    Console.WriteLine("Выходим из лаунчера");
+                    Console.WriteLine("-------------------------------------");
+                    Console.ReadLine();
+                }
+            }
 
             
 
@@ -416,7 +491,11 @@ namespace csharp_cli_launcher_ffxiv
                 {
                     Console.WriteLine("Impossible de lancer l'exécutable. Votre chemin de jeu est-il correct? " + exc);
                 }
-                
+                if (language == 4)
+                {
+                    Console.WriteLine("Не удалось запустить файл. Ввели ли вы корректный путь к игре? " + exc);
+                }
+
             }
 
             return null;
