@@ -25,7 +25,14 @@ public class networklogic
         try
         {
             Process ffxivgame = new Process();
-            ffxivgame.StartInfo.FileName = gamePath + "/game/ffxiv_dx11.exe";
+            if (dx11 == true )
+			{
+                ffxivgame.StartInfo.FileName = gamePath + "/game/ffxiv_dx11.exe";
+			}
+            else
+			{
+                ffxivgame.StartInfo.FileName = gamePath + "/game/ffxiv.exe";
+			}
             ffxivgame.StartInfo.Arguments = $"DEV.TestSID={realsid} DEV.MaxEntitledExpansionID={expansionlevel} language={language} region=3";
             if (isSteam)
             {

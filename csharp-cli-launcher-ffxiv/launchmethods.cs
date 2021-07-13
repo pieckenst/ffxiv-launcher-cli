@@ -55,6 +55,17 @@ public class LaunchMethods
 
                 Console.Write("2要素認証キ - ");
                 string otp = Console.ReadLine();
+                bool dx11 = false;
+                Console.Write("DirectX 11を有効にしてゲームを起動しますか？ - ");
+                string dx1prompt = Console.ReadLine();
+                if (dx1prompt.ToLower() == "yes")
+                {
+                    dx11 = true;
+                }
+                else
+			    {
+                    dx11 = false; 
+			    }
                 Console.WriteLine("拡張パックのレベルを入力してください-現在有効なものは \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
                 int expansionLevel = int.Parse(Console.ReadLine());
 
@@ -64,7 +75,7 @@ public class LaunchMethods
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam);
 
 
 
@@ -131,6 +142,17 @@ public class LaunchMethods
 
                 Console.Write("Two-Factor Authefication Key - ");
                 string otp = Console.ReadLine();
+                bool dx11 = true;
+                Console.Write("Do you want to launch the game with enabled DirectX 11? - ");
+                string dx1prompt = Console.ReadLine();
+                if (dx1prompt.ToLower() == "yes")
+                {
+                    dx11 = true;
+                }
+                else
+			    {
+                    dx11 = false; 
+			    }
                 Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
 
@@ -140,7 +162,7 @@ public class LaunchMethods
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam);
 
 
 
@@ -207,6 +229,17 @@ public class LaunchMethods
 
                 Console.Write("Zwei-Faktor-Authentifizierungsschlüssel - ");
                 string otp = Console.ReadLine();
+                bool dx11 = true;
+                Console.Write("Möchten Sie das Spiel mit ak tiviertem DirectX 11 starten? - ");
+                string dx1prompt = Console.ReadLine();
+                if (dx1prompt.ToLower() == "yes")
+                {
+                    dx11 = true;
+                }
+                else
+			    {
+                    dx11 = false; 
+			    }
                 Console.WriteLine("Bitte geben Sie Ihr Erweiterungspaket-Level ein - Derzeit gültige sind \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
 
@@ -216,7 +249,7 @@ public class LaunchMethods
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam);
 
 
 
@@ -283,6 +316,17 @@ public class LaunchMethods
 
                 Console.Write("Clé d'authentification à deux facteurs - ");
                 string otp = Console.ReadLine();
+                bool dx11 = true;
+                Console.Write("Voulez-vous lancer le jeu avec DirectX 11 activé ? - ");
+                string dx1prompt = Console.ReadLine();
+                if (dx1prompt.ToLower() == "yes")
+                {
+                    dx11 = true;
+                }
+                else
+			    {
+                    dx11 = false; 
+			    }
                 Console.WriteLine("Veuillez saisir le niveau de votre pack d'extension - Les versions actuellement valides sont \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
 
@@ -292,7 +336,7 @@ public class LaunchMethods
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam);
 
 
 
@@ -359,6 +403,17 @@ public class LaunchMethods
 
                 Console.Write("Код Двух-Факторной аутентификации - ");
                 string otp = Console.ReadLine();
+                bool dx11 = true;
+                Console.Write("Вы хотите запустить игру с использованием DirectX 11? - ");
+                string dx1prompt = Console.ReadLine();
+                if (dx1prompt.ToLower() == "yes")
+                {
+                    dx11 = true;
+                }
+                else
+			    {
+                    dx11 = false; 
+			    }
                 Console.WriteLine("Пожалуйста, введите уровень доступного вам дополнения - на текущий момент валидными являются следущие \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
 
@@ -368,7 +423,7 @@ public class LaunchMethods
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, 1, true, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, 1, dx11, expansionLevel, isSteam);
 
 
 
