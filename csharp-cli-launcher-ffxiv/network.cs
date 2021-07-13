@@ -12,7 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 /// <summary>
-/// Summary description for Class1
+/// Network and launch logic for XIVLoader
 /// </summary>
 public class networklogic
 {
