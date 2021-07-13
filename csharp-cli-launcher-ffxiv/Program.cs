@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -56,20 +56,117 @@ namespace csharp_cli_launcher_ffxiv
         static void Main(string[] args)
         {
             Console.Title = "XIVLOADER";
-            Console.WriteLine("FFXIV Launcher "); // it has to begin somewhere lol
-            
-            Console.WriteLine("-------------------------------------");
-            Console.WriteLine("What would you like to do?");
-            Console.WriteLine("  1) Login");
-            Console.WriteLine("  2) Exit");
-
-            Console.Write("Input - ");
-            var ansys = Console.ReadKey();
-            Console.WriteLine();
-            Console.WriteLine("-------------------------------------");
-            
-            if (ansys.KeyChar == '1')
+            var arr = new[]
             {
+                @"                                             ",
+                @" __  _______   ___                 _         ",
+                @" \ \/ /_ _\ \ / / |   ___  __ _ __| |___ _ _ ",
+                @"  >  < | | \ V /| |__/ _ \/ _` / _` / -_) '_| ",
+                @" /_/\_\___| \_/ |____\___/\__,_\__,_\___|_|  ",
+                @"                                             ",
+            };
+            Console.WindowWidth = 160;
+            Console.WriteLine("\n\n");
+            foreach(string line in arr ) {
+                Console.WriteLine(line);
+            }
+            //Console.WriteLine("FFXIV Launcher "); // it has to begin somewhere lol
+            
+            
+            
+            Console.WriteLine("0 - Japanese , 1 - English , 2 - German , 3 - French");
+            
+            Console.Write("Enter your language - ");
+            
+            int language = int.Parse(Console.ReadLine());
+
+            if ( language == 0 ) {
+             Console.WriteLine("-------------------------------------");
+             Console.WriteLine("何をしたいですか?");
+             Console.WriteLine("  1) ログイン");
+             Console.WriteLine("  2) 出口");
+
+             Console.Write("入力 - ");
+             var ansys = Console.ReadKey();
+             Console.WriteLine();
+             Console.WriteLine("-------------------------------------");
+            
+             if (ansys.KeyChar == '1')
+             {
+                //Console.WriteLine("-------------------------------------");
+                Console.WriteLine();
+                Console.Write("ゲームパスを入力してください - ");
+                string gamePath = Console.ReadLine();
+                Console.WriteLine("-------------------------------------");
+                bool isSteam = false;
+                Console.Write("あなたのゲームはクライアントのSteamバージョンですか? - ");
+                string promtw = Console.ReadLine();
+                if (promtw.ToLower() == "yes")
+                {
+                    isSteam = true;
+                }
+                else
+                {
+                    isSteam = false;
+                }
+                Console.WriteLine("-------------------------------------");
+                Console.Write("ユーザーID - ");
+                string username = Console.ReadLine();
+                //Console.WriteLine("Provided username {0}", username);
+                Console.Write("パスワード - ");
+                string password = ReadPassword();
+                //string maskpassword = "";
+                //for (int i = 0; i < password.Length; i++) { 
+                //maskpassword += "*"; 
+                //}
+
+
+                //Console.Write("Your Password is:" + maskpassword);
+                Console.WriteLine();
+
+                Console.Write("2要素認証キ - ");
+                string otp = Console.ReadLine();
+                Console.WriteLine("拡張パックのレベルを入力してください-現在有効なものは \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
+                int expansionLevel = int.Parse(Console.ReadLine());
+
+                try
+                {
+                    var sid = GetRealSid(gamePath, username, password, otp, isSteam);
+                    if (sid.Equals("BAD"))
+                        return;
+
+                    var ffxivGame = LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
+
+
+
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("ログインに失敗しました。ログイン情報を確認するか、再試行してください.\n" + exc.Message);
+                }
+                Console.ReadLine();
+             }
+             else {
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("ランチャーを終了する");
+                Console.WriteLine("-------------------------------------");
+                Console.ReadLine();
+             }    
+            }
+
+            if ( language == 1 ) {
+             Console.WriteLine("-------------------------------------");
+             Console.WriteLine("What would you like to do?");
+             Console.WriteLine("  1) Login");
+             Console.WriteLine("  2) Exit");
+
+             Console.Write("Input - ");
+             var ansys = Console.ReadKey();
+             Console.WriteLine();
+             Console.WriteLine("-------------------------------------");
+            
+             if (ansys.KeyChar == '1')
+             {
                 //Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
                 Console.Write("Please enter your gamepath - ");
@@ -112,7 +209,7 @@ namespace csharp_cli_launcher_ffxiv
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = LaunchGame(gamePath, sid, 1, true, expansionLevel, isSteam);
+                    var ffxivGame = LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
 
 
 
@@ -122,13 +219,164 @@ namespace csharp_cli_launcher_ffxiv
                     Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
                 }
                 Console.ReadLine();
-            }
-            else {
+             }
+             else {
                 Console.WriteLine("-------------------------------------");
                 Console.WriteLine("Exiting the launcher");
                 Console.WriteLine("-------------------------------------");
                 Console.ReadLine();
-            }    
+             }    
+            }
+
+            if ( language == 2 ) {
+             Console.WriteLine("-------------------------------------");
+             Console.WriteLine("Was würdest du gern tun?");
+             Console.WriteLine("  1) Anmeldung");
+             Console.WriteLine("  2) Ausgang");
+
+             Console.Write("Eingang - ");
+             var ansys = Console.ReadKey();
+             Console.WriteLine();
+             Console.WriteLine("-------------------------------------");
+            
+             if (ansys.KeyChar == '1')
+             {
+                //Console.WriteLine("-------------------------------------");
+                Console.WriteLine();
+                Console.Write("Bitte geben Sie Ihren Spielpfad ein - ");
+                string gamePath = Console.ReadLine();
+                Console.WriteLine("-------------------------------------");
+                bool isSteam = false;
+                Console.Write("Ist Ihr Spiel eine Steam-Version des Clients? - ");
+                string promtw = Console.ReadLine();
+                if (promtw.ToLower() == "yes")
+                {
+                    isSteam = true;
+                }
+                else
+                {
+                    isSteam = false;
+                }
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Nutzername - ");
+                string username = Console.ReadLine();
+                //Console.WriteLine("Provided username {0}", username);
+                Console.Write("Passwort - ");
+                string password = ReadPassword();
+                //string maskpassword = "";
+                //for (int i = 0; i < password.Length; i++) { 
+                //maskpassword += "*"; 
+                //}
+
+
+                //Console.Write("Your Password is:" + maskpassword);
+                Console.WriteLine();
+
+                Console.Write("Zwei-Faktor-Authentifizierungsschlüssel - ");
+                string otp = Console.ReadLine();
+                Console.WriteLine("Bitte geben Sie Ihr Erweiterungspaket-Level ein - Derzeit gültige sind \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                int expansionLevel = int.Parse(Console.ReadLine());
+
+                try
+                {
+                    var sid = GetRealSid(gamePath, username, password, otp, isSteam);
+                    if (sid.Equals("BAD"))
+                        return;
+
+                    var ffxivGame = LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
+
+
+
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Die Anmeldung ist fehlgeschlagen, überprüfen Sie Ihre Anmeldeinformationen oder versuchen Sie es erneut. \n" + exc.Message);
+                }
+                Console.ReadLine();
+             }
+             else {
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("Beenden des Launchers");
+                Console.WriteLine("-------------------------------------");
+                Console.ReadLine();
+             }    
+            }
+
+            if ( language == 3 ) {
+             Console.WriteLine("-------------------------------------");
+             Console.WriteLine("What would you like to do?");
+             Console.WriteLine("  1) Login");
+             Console.WriteLine("  2) Exit");
+
+             Console.Write("Input - ");
+             var ansys = Console.ReadKey();
+             Console.WriteLine();
+             Console.WriteLine("-------------------------------------");
+            
+             if (ansys.KeyChar == '1')
+             {
+                //Console.WriteLine("-------------------------------------");
+                Console.WriteLine();
+                Console.Write("Please enter your gamepath - ");
+                string gamePath = Console.ReadLine();
+                Console.WriteLine("-------------------------------------");
+                bool isSteam = false;
+                Console.Write("Is your game a steam version of the client? - ");
+                string promtw = Console.ReadLine();
+                if (promtw.ToLower() == "yes")
+                {
+                    isSteam = true;
+                }
+                else
+                {
+                    isSteam = false;
+                }
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Username - ");
+                string username = Console.ReadLine();
+                //Console.WriteLine("Provided username {0}", username);
+                Console.Write("Password - ");
+                string password = ReadPassword();
+                //string maskpassword = "";
+                //for (int i = 0; i < password.Length; i++) { 
+                //maskpassword += "*"; 
+                //}
+
+
+                //Console.Write("Your Password is:" + maskpassword);
+                Console.WriteLine();
+
+                Console.Write("Two-Factor Authefication Key - ");
+                string otp = Console.ReadLine();
+                Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                int expansionLevel = int.Parse(Console.ReadLine());
+
+                try
+                {
+                    var sid = GetRealSid(gamePath, username, password, otp, isSteam);
+                    if (sid.Equals("BAD"))
+                        return;
+
+                    var ffxivGame = LaunchGame(gamePath, sid, language, true, expansionLevel, isSteam);
+
+
+
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
+                }
+                Console.ReadLine();
+             }
+             else {
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("Exiting the launcher");
+                Console.WriteLine("-------------------------------------");
+                Console.ReadLine();
+             }    
+            }
+
+            
 
         }
 
