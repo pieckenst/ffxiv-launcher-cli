@@ -20,7 +20,7 @@ public class networklogic
 
     private static readonly string UserAgent = GenerateUserAgent();
 
-    public static Process LaunchGame(string gamePath, string realsid, int language, bool dx11, int expansionlevel, bool isSteam)
+    public static Process LaunchGame(string gamePath, string realsid, int language, bool dx11, int expansionlevel, bool isSteam , int region)
     {
         try
         {
@@ -33,7 +33,7 @@ public class networklogic
 			{
                 ffxivgame.StartInfo.FileName = gamePath + "/game/ffxiv.exe";
 			}
-            ffxivgame.StartInfo.Arguments = $"DEV.TestSID={realsid} DEV.MaxEntitledExpansionID={expansionlevel} language={language} region=3";
+            ffxivgame.StartInfo.Arguments = $"DEV.TestSID={realsid} DEV.MaxEntitledExpansionID={expansionlevel} language={language} region={region}";
             if (isSteam)
             {
                 ffxivgame.StartInfo.Environment.Add("IS_FFXIV_LAUNCH_FROM_STEAM", "1");

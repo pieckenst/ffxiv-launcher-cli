@@ -68,14 +68,15 @@ public class LaunchMethods
 			    }
                 Console.WriteLine("拡張パックのレベルを入力してください-現在有効なものは \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
                 int expansionLevel = int.Parse(Console.ReadLine());
-
+                Console.Write("クライアントインストール用のリージョンを指定してください-現在有効なリージョンは次のとおりです。 \n 1  - 日本、2  - アメリカ、3  - 国際: - ");
+                int region = int.Parse(Console.ReadLine());
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam , region);
 
 
 
@@ -155,14 +156,15 @@ public class LaunchMethods
 			    }
                 Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
-
+                Console.Write("Please provide a region for your client install - Currently valid ones are \n 1- Japan , 2 - America , 3 - International: - ");
+                int region = int.Parse(Console.ReadLine());
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam , region);
 
 
 
@@ -242,14 +244,15 @@ public class LaunchMethods
 			    }
                 Console.WriteLine("Bitte geben Sie Ihr Erweiterungspaket-Level ein - Derzeit gültige sind \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
-
+                Console.Write("Bitte geben Sie eine Region für Ihre Client-Installation an - Derzeit gültige sind \n 1- Japan, 2 - Amerika, 3 - International: -  ");
+                int region = int.Parse(Console.ReadLine());
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam , region);
 
 
 
@@ -329,14 +332,15 @@ public class LaunchMethods
 			    }
                 Console.WriteLine("Veuillez saisir le niveau de votre pack d'extension - Les versions actuellement valides sont \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
-
+                Console.Write("Veuillez indiquer une région pour l'installation de votre client - Les régions actuellement valides sont \n 1- Japon , 2 - Amérique , 3 - International: - ");
+                int region = int.Parse(Console.ReadLine());
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam , region);
 
 
 
@@ -416,14 +420,15 @@ public class LaunchMethods
 			    }
                 Console.WriteLine("Пожалуйста, введите уровень доступного вам дополнения - на текущий момент валидными являются следущие \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
-
+                Console.Write("Укажите регион установленного клиента. Действующие в настоящее время \n 1- Japan , 2 - America , 3 - International: - ");
+                int region = int.Parse(Console.ReadLine());
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
                     if (sid.Equals("BAD"))
                         return;
 
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, 1, dx11, expansionLevel, isSteam);
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, 1, dx11, expansionLevel, isSteam, region);
 
 
 
