@@ -56,6 +56,8 @@ namespace csharp_cli_launcher_ffxiv
         static void Main(string[] args)
         {
             Console.Title = "XIVLOADER";
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
             var arr = new[]
             {
                 @"                                             ",
@@ -82,8 +84,8 @@ namespace csharp_cli_launcher_ffxiv
 
             if ( language == 0 ) {
              Console.WriteLine("-------------------------------------");
-             Console.WriteLine("何をしたいですか?");
-             Console.WriteLine("  1) ログイン");
+             Console.WriteLine("何をしたいですか? ");
+             Console.WriteLine("  1) ログイン ");
              Console.WriteLine("  2) 出口");
 
              Console.Write("入力 - ");
@@ -304,11 +306,11 @@ namespace csharp_cli_launcher_ffxiv
 
             if ( language == 3 ) {
              Console.WriteLine("-------------------------------------");
-             Console.WriteLine("What would you like to do?");
-             Console.WriteLine("  1) Login");
-             Console.WriteLine("  2) Exit");
+             Console.WriteLine("Qu'est-ce que tu aimerais faire?");
+             Console.WriteLine("  1) Connexion");
+             Console.WriteLine("  2) Sortir");
 
-             Console.Write("Input - ");
+             Console.Write("Entrée - ");
              var ansys = Console.ReadKey();
              Console.WriteLine();
              Console.WriteLine("-------------------------------------");
@@ -317,11 +319,11 @@ namespace csharp_cli_launcher_ffxiv
              {
                 //Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
-                Console.Write("Please enter your gamepath - ");
+                Console.Write("Veuillez entrer votre chemin de jeu - ");
                 string gamePath = Console.ReadLine();
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
-                Console.Write("Is your game a steam version of the client? - ");
+                Console.Write("Votre jeu est-il une version Steam du client? - ");
                 string promtw = Console.ReadLine();
                 if (promtw.ToLower() == "yes")
                 {
@@ -332,10 +334,10 @@ namespace csharp_cli_launcher_ffxiv
                     isSteam = false;
                 }
                 Console.WriteLine("-------------------------------------");
-                Console.Write("Username - ");
+                Console.Write("Nom d'utilisateur - ");
                 string username = Console.ReadLine();
                 //Console.WriteLine("Provided username {0}", username);
-                Console.Write("Password - ");
+                Console.Write("Mot de passe - ");
                 string password = ReadPassword();
                 //string maskpassword = "";
                 //for (int i = 0; i < password.Length; i++) { 
@@ -346,9 +348,9 @@ namespace csharp_cli_launcher_ffxiv
                 //Console.Write("Your Password is:" + maskpassword);
                 Console.WriteLine();
 
-                Console.Write("Two-Factor Authefication Key - ");
+                Console.Write("Clé d'authentification à deux facteurs - ");
                 string otp = Console.ReadLine();
-                Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                Console.WriteLine("Veuillez saisir le niveau de votre pack d'extension - Les versions actuellement valides sont \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
                 int expansionLevel = int.Parse(Console.ReadLine());
 
                 try
@@ -364,13 +366,13 @@ namespace csharp_cli_launcher_ffxiv
                 }
                 catch (Exception exc)
                 {
-                    Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
+                    Console.WriteLine("Échec de la connexion, vérifiez vos informations de connexion ou réessayez.\n" + exc.Message);
                 }
                 Console.ReadLine();
              }
              else {
                 Console.WriteLine("-------------------------------------");
-                Console.WriteLine("Exiting the launcher");
+                Console.WriteLine("Quitter le lanceur");
                 Console.WriteLine("-------------------------------------");
                 Console.ReadLine();
              }    
@@ -398,7 +400,23 @@ namespace csharp_cli_launcher_ffxiv
             }
             catch (Exception exc)
             {
-                Console.WriteLine("Could not launch executable. Is your game path correct? " + exc);
+                if (language == 0)
+                {
+                    Console.WriteLine("実行可能ファイルを起動できませんでした。 ゲームパスは正しいですか? " + exc);
+                }
+                if (language == 1)
+                {
+                    Console.WriteLine("Could not launch executable. Is your game path correct? " + exc);
+                }
+                if (language == 2)
+                {
+                    Console.WriteLine("Die ausführbare Datei konnte nicht gestartet werden. Ist dein Spielpfad korrekt? " + exc);
+                }
+                if (language == 3)
+                {
+                    Console.WriteLine("Impossible de lancer l'exécutable. Votre chemin de jeu est-il correct? " + exc);
+                }
+                
             }
 
             return null;
