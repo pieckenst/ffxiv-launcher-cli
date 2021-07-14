@@ -1,6 +1,7 @@
 ﻿using System;
 using static networklogic;
 using csharp_cli_launcher_ffxiv;
+using System.IO;
 
 /// <summary>
 /// Basically a class for launch sequence of the launcher
@@ -24,8 +25,22 @@ public class LaunchMethods
             {
                 //Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
-                Console.Write("ゲームパスを入力してください - ");
-                string gamePath = Console.ReadLine();
+                string gamePath;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\gamepath.txt")) {
+                  TextReader tr = new StreamReader("gamepath.txt");
+                  string gamePathread = tr.ReadLine();
+                  gamePath = gamePathread;
+                  tr.Close();
+                  Console.WriteLine(gamePath);
+                }
+                else
+			    {
+                  Console.Write("ゲームパスを入力してください - ");
+                  gamePath = Console.ReadLine();
+                  TextWriter tw = new StreamWriter("gamepath.txt");
+                  tw.WriteLine(gamePath);
+                  tw.Close();
+			    }
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
                 Console.Write("あなたのゲームはクライアントのSteamバージョンですか? - ");
@@ -112,8 +127,22 @@ public class LaunchMethods
             {
                 //Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
-                Console.Write("Please enter your gamepath - ");
-                string gamePath = Console.ReadLine();
+                string gamePath;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\gamepath.txt")) {
+                  TextReader tr = new StreamReader("gamepath.txt");
+                  string gamePathread = tr.ReadLine();
+                  gamePath = gamePathread;
+                  tr.Close();
+                  Console.WriteLine(gamePath);
+                }
+                else
+			    {
+                  Console.Write("Please enter your gamepath - ");
+                  gamePath = Console.ReadLine();
+                  TextWriter tw = new StreamWriter("gamepath.txt");
+                  tw.WriteLine(gamePath);
+                  tw.Close();
+			    }
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
                 Console.Write("Is your game a steam version of the client? - ");
@@ -200,8 +229,22 @@ public class LaunchMethods
             {
                 //Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
-                Console.Write("Bitte geben Sie Ihren Spielpfad ein - ");
-                string gamePath = Console.ReadLine();
+                string gamePath;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\gamepath.txt")) {
+                  TextReader tr = new StreamReader("gamepath.txt");
+                  string gamePathread = tr.ReadLine();
+                  gamePath = gamePathread;
+                  tr.Close();
+                  Console.WriteLine(gamePath);
+                }
+                else
+			    {
+                  Console.Write("Bitte geben Sie Ihren Spielpfad ein - ");
+                  gamePath = Console.ReadLine();
+                  TextWriter tw = new StreamWriter("gamepath.txt");
+                  tw.WriteLine(gamePath);
+                  tw.Close();
+			    }
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
                 Console.Write("Ist Ihr Spiel eine Steam-Version des Clients? - ");
@@ -288,8 +331,22 @@ public class LaunchMethods
             {
                 //Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
-                Console.Write("Veuillez entrer votre chemin de jeu - ");
-                string gamePath = Console.ReadLine();
+                string gamePath;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\gamepath.txt")) {
+                  TextReader tr = new StreamReader("gamepath.txt");
+                  string gamePathread = tr.ReadLine();
+                  gamePath = gamePathread;
+                  tr.Close();
+                  Console.WriteLine(gamePath);
+                }
+                else
+			    {
+                  Console.Write("Veuillez entrer votre chemin de jeu - ");
+                  gamePath = Console.ReadLine();
+                  TextWriter tw = new StreamWriter("gamepath.txt");
+                  tw.WriteLine(gamePath);
+                  tw.Close();
+			    }
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
                 Console.Write("Votre jeu est-il une version Steam du client? - ");
@@ -376,8 +433,22 @@ public class LaunchMethods
             {
                 //Console.WriteLine("-------------------------------------");
                 Console.WriteLine();
-                Console.Write("Введите путь до клиента игры - ");
-                string gamePath = Console.ReadLine();
+                string gamePath;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\gamepath.txt")) {
+                  TextReader tr = new StreamReader("gamepath.txt");
+                  string gamePathread = tr.ReadLine();
+                  gamePath = gamePathread;
+                  tr.Close();
+                  Console.WriteLine(gamePath);
+                }
+                else
+			    {
+                  Console.Write("Введите путь до клиента игры - ");
+                  gamePath = Console.ReadLine();
+                  TextWriter tw = new StreamWriter("gamepath.txt");
+                  tw.WriteLine(gamePath);
+                  tw.Close();
+			    }
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
                 Console.Write("Является ли ваш клиент версией клиента для Steam? - ");
