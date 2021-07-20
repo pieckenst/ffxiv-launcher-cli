@@ -12,3 +12,4 @@ C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launche
 C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Release\net6.0\ref\xivloader.dll
 C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Release\net6.0\xivloader.pdb
 C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Release\net6.0\csharp-cli-launcher-ffxiv.genruntimeconfig.cache
+C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Release\net6.0\csharp-cli-launcher-ffxiv.csproj.AssemblyReference.cache

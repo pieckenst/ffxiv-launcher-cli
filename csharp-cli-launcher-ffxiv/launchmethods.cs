@@ -111,21 +111,82 @@ public class LaunchMethods
 
                 Console.Write("2要素認証キ - ");
                 string otp = Console.ReadLine();
+                string dx1prompt;
                 bool dx11 = false;
-                Console.Write("DirectX 11を有効にしてゲームを起動しますか？ - ");
-                string dx1prompt = Console.ReadLine();
-                if (dx1prompt.ToLower() == "yes")
-                {
-                    dx11 = true;
-                }
+                int expansionLevel;
+                int region;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\booleansandvars.txt"))
+			    {
+                   bool promterx = false;
+                   Console.Write("既存のパラメータをロードしますか? - ");
+                   string askawayx = Console.ReadLine();
+                   if (askawayx.ToLower() == "yes")
+                   {
+                     promterx = true;
+                   }
+                   else
+                   {
+                     promterx = false;
+                   }
+                   if (promterx == true) { 
+                     TextReader tr = new StreamReader("booleansandvars.txt");
+                     string dx1reader = tr.ReadLine();
+                     dx1prompt = dx1reader;
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                       dx11 = true;
+                     }
+                     else
+			         {
+                       dx11 = false; 
+			         }
+                     string exlevelreader = tr.ReadLine();
+                     expansionLevel = int.Parse(exlevelreader);
+                     string regionreader = tr.ReadLine();
+                     region =  int.Parse(regionreader);
+                     tr.Close();
+                   }
+                   else
+				   {
+                     Console.Write("DirectX11を有効にしてゲームを起動しますか? - ");
+                     dx1prompt = Console.ReadLine();
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                     dx11 = true;
+                     }
+                     else
+			         {
+                     dx11 = false; 
+			         }
+                     Console.WriteLine("拡張パックのレベルを入力してください-ここに現在利用可能で有効なものがあります \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
+                     expansionLevel = int.Parse(Console.ReadLine());
+                     Console.Write("クライアントインストール用のリージョンを指定してください-現在有効なリージョンは次のとおりです \n 1-日本、2-アメリカ、3-国際: - ");
+                     region = int.Parse(Console.ReadLine());
+				   }
+			    }
                 else
 			    {
+                  Console.Write("DirectX11を有効にしてゲームを起動しますか? - ");
+                  dx1prompt = Console.ReadLine();
+                  if (dx1prompt.ToLower() == "yes")
+                  {
+                    dx11 = true;
+                  }
+                  else
+			      {
                     dx11 = false; 
+			      }
+                  Console.WriteLine("拡張パックのレベルを入力してください-ここに現在利用可能で有効なものがあります \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
+                  expansionLevel = int.Parse(Console.ReadLine());
+                  TextWriter twxx = new StreamWriter("booleansandvars.txt");
+                  Console.Write("クライアントインストール用のリージョンを指定してください-現在有効なリージョンは次のとおりです \n 1-日本、2-アメリカ、3-国際: - ");
+                  region = int.Parse(Console.ReadLine());
+                  twxx.WriteLine(dx1prompt);
+                  twxx.WriteLine(expansionLevel);
+                  twxx.WriteLine(region);
+                  twxx.Close();
+                  
 			    }
-                Console.WriteLine("拡張パックのレベルを入力してください-現在有効なものは \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
-                int expansionLevel = int.Parse(Console.ReadLine());
-                Console.Write("クライアントインストール用のリージョンを指定してください-現在有効なリージョンは次のとおりです。 \n 1  - 日本、2  - アメリカ、3  - 国際: - ");
-                int region = int.Parse(Console.ReadLine());
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
@@ -255,21 +316,85 @@ public class LaunchMethods
 
                 Console.Write("Two-Factor Authefication Key - ");
                 string otp = Console.ReadLine();
-                bool dx11 = true;
-                Console.Write("Do you want to launch the game with enabled DirectX 11? - ");
-                string dx1prompt = Console.ReadLine();
-                if (dx1prompt.ToLower() == "yes")
-                {
-                    dx11 = true;
-                }
+                string dx1prompt;
+                bool dx11 = false;
+                int expansionLevel;
+                int region;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\booleansandvars.txt"))
+			    {
+                   bool promterx = false;
+                   Console.Write("Do you wish to load existing params? - ");
+                   string askawayx = Console.ReadLine();
+                   if (askawayx.ToLower() == "yes")
+                   {
+                     promterx = true;
+                   }
+                   else
+                   {
+                     promterx = false;
+                   }
+                   if (promterx == true) { 
+                     TextReader tr = new StreamReader("booleansandvars.txt");
+                     string dx1reader = tr.ReadLine();
+                     dx1prompt = dx1reader;
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                       dx11 = true;
+                     }
+                     else
+			         {
+                       dx11 = false; 
+			         }
+                     string exlevelreader = tr.ReadLine();
+                     expansionLevel = int.Parse(exlevelreader);
+                     string regionreader = tr.ReadLine();
+                     region =  int.Parse(regionreader);
+                     tr.Close();
+                   }
+                   else
+				   {
+                     Console.Write("Do you want to launch the game with enabled DirectX 11? - ");
+                     dx1prompt = Console.ReadLine();
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                     dx11 = true;
+                     }
+                     else
+			         {
+                     dx11 = false; 
+			         }
+                     Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                     expansionLevel = int.Parse(Console.ReadLine());
+                     Console.Write("Please provide a region for your client install - Currently valid ones are \n 1- Japan , 2 - America , 3 - International: - ");
+                     region = int.Parse(Console.ReadLine());
+				   }
+			    }
                 else
 			    {
+                  Console.Write("Do you want to launch the game with enabled DirectX 11? - ");
+                  dx1prompt = Console.ReadLine();
+                  if (dx1prompt.ToLower() == "yes")
+                  {
+                    dx11 = true;
+                  }
+                  else
+			      {
                     dx11 = false; 
+			      }
+                  Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                  expansionLevel = int.Parse(Console.ReadLine());
+                  TextWriter twxx = new StreamWriter("booleansandvars.txt");
+                  Console.Write("Please provide a region for your client install - Currently valid ones are \n 1- Japan , 2 - America , 3 - International: - ");
+                  region = int.Parse(Console.ReadLine());
+                  twxx.WriteLine(dx1prompt);
+                  twxx.WriteLine(expansionLevel);
+                  twxx.WriteLine(region);
+                  twxx.Close();
+                  
 			    }
-                Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
-                int expansionLevel = int.Parse(Console.ReadLine());
-                Console.Write("Please provide a region for your client install - Currently valid ones are \n 1- Japan , 2 - America , 3 - International: - ");
-                int region = int.Parse(Console.ReadLine());
+                
+                
+                
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
@@ -398,21 +523,82 @@ public class LaunchMethods
 
                 Console.Write("Zwei-Faktor-Authentifizierungsschlüssel - ");
                 string otp = Console.ReadLine();
-                bool dx11 = true;
-                Console.Write("Möchten Sie das Spiel mit ak tiviertem DirectX 11 starten? - ");
-                string dx1prompt = Console.ReadLine();
-                if (dx1prompt.ToLower() == "yes")
-                {
-                    dx11 = true;
-                }
+                string dx1prompt;
+                bool dx11 = false;
+                int expansionLevel;
+                int region;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\booleansandvars.txt"))
+			    {
+                   bool promterx = false;
+                   Console.Write("Möchten Sie vorhandene Parameter laden? - ");
+                   string askawayx = Console.ReadLine();
+                   if (askawayx.ToLower() == "yes")
+                   {
+                     promterx = true;
+                   }
+                   else
+                   {
+                     promterx = false;
+                   }
+                   if (promterx == true) { 
+                     TextReader tr = new StreamReader("booleansandvars.txt");
+                     string dx1reader = tr.ReadLine();
+                     dx1prompt = dx1reader;
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                       dx11 = true;
+                     }
+                     else
+			         {
+                       dx11 = false; 
+			         }
+                     string exlevelreader = tr.ReadLine();
+                     expansionLevel = int.Parse(exlevelreader);
+                     string regionreader = tr.ReadLine();
+                     region =  int.Parse(regionreader);
+                     tr.Close();
+                   }
+                   else
+				   {
+                     Console.Write("Möchten Sie das Spiel mit aktiviertem DirectX 11 starten? - ");
+                     dx1prompt = Console.ReadLine();
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                     dx11 = true;
+                     }
+                     else
+			         {
+                     dx11 = false; 
+			         }
+                     Console.WriteLine("Bitte geben Sie Ihr Erweiterungspaket-Level ein - Derzeit gültig sind \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                     expansionLevel = int.Parse(Console.ReadLine());
+                     Console.Write("Bitte geben Sie eine Region für Ihre Client-Installation an - Derzeit gültige sind \n 1- Japan , 2 - America , 3 - International: - ");
+                     region = int.Parse(Console.ReadLine());
+				   }
+			    }
                 else
 			    {
+                  Console.Write("Möchten Sie das Spiel mit aktiviertem DirectX 11 starten? - ");
+                  dx1prompt = Console.ReadLine();
+                  if (dx1prompt.ToLower() == "yes")
+                  {
+                    dx11 = true;
+                  }
+                  else
+			      {
                     dx11 = false; 
+			      }
+                  Console.WriteLine("Bitte geben Sie Ihr Erweiterungspaket-Level ein - Derzeit gültig sind \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                  expansionLevel = int.Parse(Console.ReadLine());
+                  TextWriter twxx = new StreamWriter("booleansandvars.txt");
+                  Console.Write("Bitte geben Sie eine Region für Ihre Client-Installation an - Derzeit gültige sind \n 1- Japan , 2 - America , 3 - International: - ");
+                  region = int.Parse(Console.ReadLine());
+                  twxx.WriteLine(dx1prompt);
+                  twxx.WriteLine(expansionLevel);
+                  twxx.WriteLine(region);
+                  twxx.Close();
+                  
 			    }
-                Console.WriteLine("Bitte geben Sie Ihr Erweiterungspaket-Level ein - Derzeit gültige sind \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
-                int expansionLevel = int.Parse(Console.ReadLine());
-                Console.Write("Bitte geben Sie eine Region für Ihre Client-Installation an - Derzeit gültige sind \n 1- Japan, 2 - Amerika, 3 - International: -  ");
-                int region = int.Parse(Console.ReadLine());
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
@@ -541,21 +727,82 @@ public class LaunchMethods
 
                 Console.Write("Clé d'authentification à deux facteurs - ");
                 string otp = Console.ReadLine();
-                bool dx11 = true;
-                Console.Write("Voulez-vous lancer le jeu avec DirectX 11 activé ? - ");
-                string dx1prompt = Console.ReadLine();
-                if (dx1prompt.ToLower() == "yes")
-                {
-                    dx11 = true;
-                }
+                string dx1prompt;
+                bool dx11 = false;
+                int expansionLevel;
+                int region;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\booleansandvars.txt"))
+			    {
+                   bool promterx = false;
+                   Console.Write("Souhaitez-vous charger les paramètres existants? - ");
+                   string askawayx = Console.ReadLine();
+                   if (askawayx.ToLower() == "yes")
+                   {
+                     promterx = true;
+                   }
+                   else
+                   {
+                     promterx = false;
+                   }
+                   if (promterx == true) { 
+                     TextReader tr = new StreamReader("booleansandvars.txt");
+                     string dx1reader = tr.ReadLine();
+                     dx1prompt = dx1reader;
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                       dx11 = true;
+                     }
+                     else
+			         {
+                       dx11 = false; 
+			         }
+                     string exlevelreader = tr.ReadLine();
+                     expansionLevel = int.Parse(exlevelreader);
+                     string regionreader = tr.ReadLine();
+                     region =  int.Parse(regionreader);
+                     tr.Close();
+                   }
+                   else
+				   {
+                     Console.Write("Voulez-vous lancer le jeu avec DirectX 11 activé? - ");
+                     dx1prompt = Console.ReadLine();
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                     dx11 = true;
+                     }
+                     else
+			         {
+                     dx11 = false; 
+			         }
+                     Console.WriteLine("Veuillez saisir le niveau de votre pack d'extension - Les versions actuellement valides sont \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                     expansionLevel = int.Parse(Console.ReadLine());
+                     Console.Write("Veuillez indiquer une région pour l'installation de votre client - Les régions actuellement valides sont \n 1- Japan , 2 - America , 3 - International: - ");
+                     region = int.Parse(Console.ReadLine());
+				   }
+			    }
                 else
 			    {
+                  Console.Write("Voulez-vous lancer le jeu avec DirectX 11 activé? - ");
+                  dx1prompt = Console.ReadLine();
+                  if (dx1prompt.ToLower() == "yes")
+                  {
+                    dx11 = true;
+                  }
+                  else
+			      {
                     dx11 = false; 
+			      }
+                  Console.WriteLine("Veuillez saisir le niveau de votre pack d'extension - Les versions actuellement valides sont \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                  expansionLevel = int.Parse(Console.ReadLine());
+                  TextWriter twxx = new StreamWriter("booleansandvars.txt");
+                  Console.Write("Veuillez indiquer une région pour l'installation de votre client - Les régions actuellement valides sont \n 1- Japan , 2 - America , 3 - International: - ");
+                  region = int.Parse(Console.ReadLine());
+                  twxx.WriteLine(dx1prompt);
+                  twxx.WriteLine(expansionLevel);
+                  twxx.WriteLine(region);
+                  twxx.Close();
+                  
 			    }
-                Console.WriteLine("Veuillez saisir le niveau de votre pack d'extension - Les versions actuellement valides sont \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
-                int expansionLevel = int.Parse(Console.ReadLine());
-                Console.Write("Veuillez indiquer une région pour l'installation de votre client - Les régions actuellement valides sont \n 1- Japon , 2 - Amérique , 3 - International: - ");
-                int region = int.Parse(Console.ReadLine());
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
@@ -684,21 +931,83 @@ public class LaunchMethods
 
                 Console.Write("Код Двух-Факторной аутентификации - ");
                 string otp = Console.ReadLine();
-                bool dx11 = true;
-                Console.Write("Вы хотите запустить игру с использованием DirectX 11? - ");
-                string dx1prompt = Console.ReadLine();
-                if (dx1prompt.ToLower() == "yes")
-                {
-                    dx11 = true;
-                }
+                string dx1prompt;
+                bool dx11 = false;
+                int expansionLevel;
+                int region;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\booleansandvars.txt"))
+			    {
+                   bool promterx = false;
+                   Console.Write("Хотитите ли вы запустить игру с сохраненными параметрами? - ");
+                   string askawayx = Console.ReadLine();
+                   if (askawayx.ToLower() == "yes")
+                   {
+                     promterx = true;
+                   }
+                   else
+                   {
+                     promterx = false;
+                   }
+                   if (promterx == true) { 
+                     TextReader tr = new StreamReader("booleansandvars.txt");
+                     string dx1reader = tr.ReadLine();
+                     dx1prompt = dx1reader;
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                       dx11 = true;
+                     }
+                     else
+			         {
+                       dx11 = false; 
+			         }
+                     string exlevelreader = tr.ReadLine();
+                     expansionLevel = int.Parse(exlevelreader);
+                     string regionreader = tr.ReadLine();
+                     region =  int.Parse(regionreader);
+                     tr.Close();
+                   }
+                   else
+				   {
+                     Console.Write("Вы хотите запустить игру с использованием DirectX 11? - ");
+                     dx1prompt = Console.ReadLine();
+                     if (dx1prompt.ToLower() == "yes")
+                     {
+                     dx11 = true;
+                     }
+                     else
+			         {
+                     dx11 = false; 
+			         }
+                     Console.WriteLine("Пожалуйста, введите уровень доступного вам дополнения - на текущий момент валидными являются следущие \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                     expansionLevel = int.Parse(Console.ReadLine());
+                     Console.Write("Укажите регион установленного клиента. Действующие в настоящее время \n 1- Japan , 2 - America , 3 - International: - ");
+                     region = int.Parse(Console.ReadLine());
+				   }
+			    }
                 else
 			    {
+                  Console.Write("Вы хотите запустить игру с использованием DirectX 11? - ");
+                  dx1prompt = Console.ReadLine();
+                  if (dx1prompt.ToLower() == "yes")
+                  {
+                    dx11 = true;
+                  }
+                  else
+			      {
                     dx11 = false; 
+			      }
+                  Console.WriteLine("Пожалуйста, введите уровень доступного вам дополнения - на текущий момент валидными являются следущие \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                  expansionLevel = int.Parse(Console.ReadLine());
+                  TextWriter twxx = new StreamWriter("booleansandvars.txt");
+                  Console.Write("Укажите регион установленного клиента. Действующие в настоящее время \n 1- Japan , 2 - America , 3 - International: - ");
+                  region = int.Parse(Console.ReadLine());
+                  twxx.WriteLine(dx1prompt);
+                  twxx.WriteLine(expansionLevel);
+                  twxx.WriteLine(region);
+                  twxx.Close();
+                  
 			    }
-                Console.WriteLine("Пожалуйста, введите уровень доступного вам дополнения - на текущий момент валидными являются следущие \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
-                int expansionLevel = int.Parse(Console.ReadLine());
-                Console.Write("Укажите регион установленного клиента. Действующие в настоящее время \n 1- Japan , 2 - America , 3 - International: - ");
-                int region = int.Parse(Console.ReadLine());
+                
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
