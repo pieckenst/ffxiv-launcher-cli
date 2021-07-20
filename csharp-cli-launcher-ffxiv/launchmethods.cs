@@ -54,11 +54,52 @@ public class LaunchMethods
                     isSteam = false;
                 }
                 Console.WriteLine("-------------------------------------");
-                Console.Write("ユーザーID - ");
-                string username = Console.ReadLine();
+                string username;
+                
                 //Console.WriteLine("Provided username {0}", username);
-                Console.Write("パスワード - ");
-                string password = Program.ReadPassword();
+                
+                string password;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
+                  bool promter = false;
+                  Console.Write("保存されている既存のログインとパスワードを使用しますか? - ");
+                  string askaway = Console.ReadLine();
+                  if (askaway.ToLower() == "yes")
+                  {
+                    promter = true;
+                  }
+                  else
+                  {
+                    promter = false;
+                  }
+                  if (promter == true) {
+                    username = ReturnUsername();
+                    TextReader tr = new StreamReader("password.txt");
+                    string passwordread = tr.ReadLine();
+                    password = passwordread;
+                    tr.Close();
+                  }
+                  else
+				  {
+                    Console.Write("ユーザーID - ");
+                    username = Console.ReadLine();
+                    Console.Write("パスワード - ");
+                    password = Program.ReadPassword();
+                  }
+                }
+                else
+			    {
+                  Console.Write("ユーザーID - ");
+                  username = Console.ReadLine();
+                  TextWriter twx = new StreamWriter("username.txt");
+                  twx.WriteLine(username);
+                  twx.Close();
+                  Console.Write("パスワード - ");
+                  password = Program.ReadPassword();
+                  TextWriter tw = new StreamWriter("password.txt");
+                  tw.WriteLine(password);
+                  tw.Close();
+
+                }
                 //string maskpassword = "";
                 //for (int i = 0; i < password.Length; i++) { 
                 //maskpassword += "*"; 
@@ -156,11 +197,53 @@ public class LaunchMethods
                     isSteam = false;
                 }
                 Console.WriteLine("-------------------------------------");
-                Console.Write("Username - ");
-                string username = Console.ReadLine();
+                
+                string username;
+                
                 //Console.WriteLine("Provided username {0}", username);
-                Console.Write("Password - ");
-                string password = Program.ReadPassword();
+                
+                string password;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
+                  bool promter = false;
+                  Console.Write("Do you wish to use existing saved login and password? - ");
+                  string askaway = Console.ReadLine();
+                  if (askaway.ToLower() == "yes")
+                  {
+                    promter = true;
+                  }
+                  else
+                  {
+                    promter = false;
+                  }
+                  if (promter == true) {
+                    username = ReturnUsername();
+                    TextReader tr = new StreamReader("password.txt");
+                    string passwordread = tr.ReadLine();
+                    password = passwordread;
+                    tr.Close();
+                  }
+                  else
+				  {
+                    Console.Write("Username - ");
+                    username = Console.ReadLine();
+                    Console.Write("Password - ");
+                    password = Program.ReadPassword();
+                  }
+                }
+                else
+			    {
+                  Console.Write("Username - ");
+                  username = Console.ReadLine();
+                  TextWriter twx = new StreamWriter("username.txt");
+                  twx.WriteLine(username);
+                  twx.Close();
+                  Console.Write("Password - ");
+                  password = Program.ReadPassword();
+                  TextWriter tw = new StreamWriter("password.txt");
+                  tw.WriteLine(password);
+                  tw.Close();
+
+                }
                 //string maskpassword = "";
                 //for (int i = 0; i < password.Length; i++) { 
                 //maskpassword += "*"; 
@@ -258,11 +341,52 @@ public class LaunchMethods
                     isSteam = false;
                 }
                 Console.WriteLine("-------------------------------------");
-                Console.Write("Nutzername - ");
-                string username = Console.ReadLine();
+                string username;
+                
                 //Console.WriteLine("Provided username {0}", username);
-                Console.Write("Passwort - ");
-                string password = Program.ReadPassword();
+                
+                string password;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
+                  bool promter = false;
+                  Console.Write("Möchten Sie das vorhandene gespeicherte Login und Passwort verwenden? - ");
+                  string askaway = Console.ReadLine();
+                  if (askaway.ToLower() == "yes")
+                  {
+                    promter = true;
+                  }
+                  else
+                  {
+                    promter = false;
+                  }
+                  if (promter == true) {
+                    username = ReturnUsername();
+                    TextReader tr = new StreamReader("password.txt");
+                    string passwordread = tr.ReadLine();
+                    password = passwordread;
+                    tr.Close();
+                  }
+                  else
+				  {
+                    Console.Write("Nutzername - ");
+                    username = Console.ReadLine();
+                    Console.Write("Passwort - ");
+                    password = Program.ReadPassword();
+                  }
+                }
+                else
+			    {
+                  Console.Write("Nutzername - ");
+                  username = Console.ReadLine();
+                  TextWriter twx = new StreamWriter("username.txt");
+                  twx.WriteLine(username);
+                  twx.Close();
+                  Console.Write("Passwort - ");
+                  password = Program.ReadPassword();
+                  TextWriter tw = new StreamWriter("password.txt");
+                  tw.WriteLine(password);
+                  tw.Close();
+
+                }
                 //string maskpassword = "";
                 //for (int i = 0; i < password.Length; i++) { 
                 //maskpassword += "*"; 
@@ -360,11 +484,52 @@ public class LaunchMethods
                     isSteam = false;
                 }
                 Console.WriteLine("-------------------------------------");
-                Console.Write("Nom d'utilisateur - ");
-                string username = Console.ReadLine();
+                string username;
+                
                 //Console.WriteLine("Provided username {0}", username);
-                Console.Write("Mot de passe - ");
-                string password = Program.ReadPassword();
+                
+                string password;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
+                  bool promter = false;
+                  Console.Write("Souhaitez-vous utiliser le login et le mot de passe enregistrés existants? - ");
+                  string askaway = Console.ReadLine();
+                  if (askaway.ToLower() == "yes")
+                  {
+                    promter = true;
+                  }
+                  else
+                  {
+                    promter = false;
+                  }
+                  if (promter == true) {
+                    username = ReturnUsername();
+                    TextReader tr = new StreamReader("password.txt");
+                    string passwordread = tr.ReadLine();
+                    password = passwordread;
+                    tr.Close();
+                  }
+                  else
+				  {
+                    Console.Write("Nom d'utilisateur - ");
+                    username = Console.ReadLine();
+                    Console.Write("Mot de passe - ");
+                    password = Program.ReadPassword();
+                  }
+                }
+                else
+			    {
+                  Console.Write("Nom d'utilisateur - ");
+                  username = Console.ReadLine();
+                  TextWriter twx = new StreamWriter("username.txt");
+                  twx.WriteLine(username);
+                  twx.Close();
+                  Console.Write("Mot de passe - ");
+                  password = Program.ReadPassword();
+                  TextWriter tw = new StreamWriter("password.txt");
+                  tw.WriteLine(password);
+                  tw.Close();
+
+                }
                 //string maskpassword = "";
                 //for (int i = 0; i < password.Length; i++) { 
                 //maskpassword += "*"; 
@@ -462,11 +627,52 @@ public class LaunchMethods
                     isSteam = false;
                 }
                 Console.WriteLine("-------------------------------------");
-                Console.Write("Имя пользователя - ");
-                string username = Console.ReadLine();
+                string username;
+                
                 //Console.WriteLine("Provided username {0}", username);
-                Console.Write("Пароль - ");
-                string password = Program.ReadPassword();
+                
+                string password;
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
+                  bool promter = false;
+                  Console.Write("Хотите ли вы использовать сохраненные имя пользователя и пароль? - ");
+                  string askaway = Console.ReadLine();
+                  if (askaway.ToLower() == "yes")
+                  {
+                    promter = true;
+                  }
+                  else
+                  {
+                    promter = false;
+                  }
+                  if (promter == true) {
+                    username = ReturnUsername();
+                    TextReader tr = new StreamReader("password.txt");
+                    string passwordread = tr.ReadLine();
+                    password = passwordread;
+                    tr.Close();
+                  }
+                  else
+				  {
+                    Console.Write("Имя Пользователя - ");
+                    username = Console.ReadLine();
+                    Console.Write("Пароль - ");
+                    password = Program.ReadPassword();
+                  }
+                }
+                else
+			    {
+                  Console.Write("Имя Пользователя - ");
+                  username = Console.ReadLine();
+                  TextWriter twx = new StreamWriter("username.txt");
+                  twx.WriteLine(username);
+                  twx.Close();
+                  Console.Write("Пароль - ");
+                  password = Program.ReadPassword();
+                  TextWriter tw = new StreamWriter("password.txt");
+                  tw.WriteLine(password);
+                  tw.Close();
+
+                }
                 //string maskpassword = "";
                 //for (int i = 0; i < password.Length; i++) { 
                 //maskpassword += "*"; 
@@ -518,5 +724,13 @@ public class LaunchMethods
                 Console.ReadLine();
             }
         }
+        public static string ReturnUsername()
+	    {
+           TextReader trx = new StreamReader("username.txt");
+           string usernameread = trx.ReadLine();
+           string username = usernameread;
+           trx.Close();
+           return username;
+	    }
     
 }
