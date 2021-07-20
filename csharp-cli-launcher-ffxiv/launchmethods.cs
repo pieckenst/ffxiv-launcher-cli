@@ -29,19 +29,12 @@ public class LaunchMethods
                 Console.WriteLine();
                 string gamePath;
                 if (File.Exists(Directory.GetCurrentDirectory() + @"\gamepath.txt")) {
-                  TextReader tr = new StreamReader("gamepath.txt");
-                  string gamePathread = tr.ReadLine();
-                  gamePath = gamePathread;
-                  tr.Close();
-                  Console.WriteLine(gamePath);
+                  gamePath = GamePathLoad();
                 }
                 else
 			    {
                   Console.Write("Please enter your gamepath - ");
-                  gamePath = Console.ReadLine();
-                  TextWriter tw = new StreamWriter("gamepath.txt");
-                  tw.WriteLine(gamePath);
-                  tw.Close();
+                  gamePath = GamePathWrite();
 			    }
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
@@ -132,9 +125,7 @@ public class LaunchMethods
                      promterx = false;
                    }
                    if (promterx == true) { 
-                     TextReader tr = new StreamReader("booleansandvars.txt");
-                     string dx1reader = tr.ReadLine();
-                     dx1prompt = dx1reader;
+                     dx1prompt = dx1readd();
                      if (dx1prompt.ToLower() == "yes")
                      {
                        dx11 = true;
@@ -143,11 +134,8 @@ public class LaunchMethods
 			         {
                        dx11 = false; 
 			         }
-                     string exlevelreader = tr.ReadLine();
-                     expansionLevel = int.Parse(exlevelreader);
-                     string regionreader = tr.ReadLine();
-                     region =  int.Parse(regionreader);
-                     tr.Close();
+                     expansionLevel = exlevelread();
+                     region = regionread();
                    }
                    else
 				   {
@@ -286,5 +274,48 @@ public class LaunchMethods
                     
                 }
 	    }
-    
+        public static string GamePathWrite()
+	    {
+           string gamePath = Console.ReadLine();
+           TextWriter tw = new StreamWriter("gamepath.txt");
+           tw.WriteLine(gamePath);
+           tw.Close();
+           return gamePath;
+	    }
+        public static string GamePathLoad()
+	    {
+           TextReader tr = new StreamReader("gamepath.txt");
+           string gamePathread = tr.ReadLine();
+           string gamePath = gamePathread;
+           tr.Close();
+           Console.WriteLine(gamePath);
+           return gamePath;
+	    }
+        public static string dx1readd()
+	    {
+           TextReader tr = new StreamReader("booleansandvars.txt");
+           string dx1reader = tr.ReadLine();
+           string dx1prompt = dx1reader;
+           tr.Close();
+           return dx1prompt;
+	    }
+        public static int exlevelread()
+	    {
+          TextReader tr = new StreamReader("booleansandvars.txt");
+          string blankreader = tr.ReadLine();
+          string exlevelreader = tr.ReadLine();
+          int expansionLevel = int.Parse(exlevelreader);
+          tr.Close();
+          return expansionLevel;
+	    }
+        public static int regionread()
+	    {
+          TextReader tr = new StreamReader("booleansandvars.txt");
+          string blankreaderone = tr.ReadLine();
+          string blankreadertwo = tr.ReadLine();
+          string regionreader = tr.ReadLine();
+          int region =  int.Parse(regionreader);
+          tr.Close();
+          return region;
+	    }
 }

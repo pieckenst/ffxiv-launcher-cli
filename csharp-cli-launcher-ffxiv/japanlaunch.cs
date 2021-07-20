@@ -27,19 +27,12 @@ public class JapaneseLaunchMethod
                 Console.WriteLine();
                 string gamePath;
                 if (File.Exists(Directory.GetCurrentDirectory() + @"\gamepath.txt")) {
-                  TextReader tr = new StreamReader("gamepath.txt");
-                  string gamePathread = tr.ReadLine();
-                  gamePath = gamePathread;
-                  tr.Close();
-                  Console.WriteLine(gamePath);
+                  gamePath = GamePathLoad();
                 }
                 else
 			    {
                   Console.Write("ゲームパスを入力してください - ");
-                  gamePath = Console.ReadLine();
-                  TextWriter tw = new StreamWriter("gamepath.txt");
-                  tw.WriteLine(gamePath);
-                  tw.Close();
+                  gamePath = GamePathWrite();
 			    }
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
@@ -129,9 +122,7 @@ public class JapaneseLaunchMethod
                      promterx = false;
                    }
                    if (promterx == true) { 
-                     TextReader tr = new StreamReader("booleansandvars.txt");
-                     string dx1reader = tr.ReadLine();
-                     dx1prompt = dx1reader;
+                     dx1prompt = dx1readd();
                      if (dx1prompt.ToLower() == "yes")
                      {
                        dx11 = true;
@@ -140,11 +131,8 @@ public class JapaneseLaunchMethod
 			         {
                        dx11 = false; 
 			         }
-                     string exlevelreader = tr.ReadLine();
-                     expansionLevel = int.Parse(exlevelreader);
-                     string regionreader = tr.ReadLine();
-                     region =  int.Parse(regionreader);
-                     tr.Close();
+                     expansionLevel = exlevelread();
+                     region = regionread();
                    }
                    else
 				   {
