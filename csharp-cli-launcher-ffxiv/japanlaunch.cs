@@ -187,21 +187,7 @@ public class JapaneseLaunchMethod
                   twxx.Close();
                   
 			    }
-                try
-                {
-                    var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
-                    if (sid.Equals("BAD"))
-                        return;
-
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam , region);
-
-
-
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine("ログインに失敗しました。ログイン情報を確認するか、再試行してください.\n" + exc.Message);
-                }
+                LogicLaunchNorm(gamePath,username,password,otp ,language , expansionLevel  ,region,isSteam ,dx11);
                 Console.ReadLine();
             }
             else

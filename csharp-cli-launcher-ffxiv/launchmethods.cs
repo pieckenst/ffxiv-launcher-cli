@@ -190,24 +190,7 @@ public class LaunchMethods
                   twxx.Close();
                   
 			    }
-                
-                
-                
-                try
-                {
-                    var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
-                    if (sid.Equals("BAD"))
-                        return;
-
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam , region);
-
-
-
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
-                }
+                LogicLaunchNorm(gamePath,username,password,otp ,language , expansionLevel  ,region,isSteam ,dx11);
                 Console.ReadLine();
             }
             else
@@ -226,6 +209,82 @@ public class LaunchMethods
            string username = usernameread;
            trx.Close();
            return username;
+	    }
+        public static void LogicLaunchNorm(string gamePath, string username, string password,string otp ,int language , int expansionLevel  ,int region, bool isSteam , bool dx11)
+	    {
+                try
+                {
+                    var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
+                    if (sid.Equals("BAD"))
+                        return;
+
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam , region);
+
+
+
+                }
+                catch (Exception exc)
+                {
+                    if (language == 0)
+                    {
+                      Console.WriteLine("ログインに失敗しました。ログイン情報を確認するか、再試行してください.\n" + exc.Message);
+                    }
+                    if (language == 1)
+                    {
+                      Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
+                    }
+                    if (language == 2)
+                    {
+                      Console.WriteLine("Anmeldung fehlgeschlagen, überprüfe deine Anmeldedaten oder versuche es noch einmal.\n" + exc.Message);
+                    }
+                    if (language == 3)
+                    {
+                      Console.WriteLine("Échec de la connexion, vérifiez vos informations de connexion ou réessayez.\n" + exc.Message);
+                    }
+                    if (language == 4)
+                    {
+                      Console.WriteLine("Не удалось войти в систему, проверьте данные для входа или попробуйте еще раз.\n" + exc.Message);
+                    }
+                    
+                }
+	    }
+        public static void LogicLaunchRnorm(string gamePath, string username, string password,string otp ,int language , int expansionLevel  ,int region, bool isSteam , bool dx11)
+	    {
+                try
+                {
+                    var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
+                    if (sid.Equals("BAD"))
+                        return;
+
+                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, 1, dx11, expansionLevel, isSteam , region);
+
+
+
+                }
+                catch (Exception exc)
+                {
+                    if (language == 0)
+                    {
+                      Console.WriteLine("ログインに失敗しました。ログイン情報を確認するか、再試行してください.\n" + exc.Message);
+                    }
+                    if (language == 1)
+                    {
+                      Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
+                    }
+                    if (language == 2)
+                    {
+                      Console.WriteLine("Anmeldung fehlgeschlagen, überprüfe deine Anmeldedaten oder versuche es noch einmal.\n" + exc.Message);
+                    }
+                    if (language == 3)
+                    {
+                      Console.WriteLine("Échec de la connexion, vérifiez vos informations de connexion ou réessayez.\n" + exc.Message);
+                    }
+                    if (language == 4)
+                    {
+                      Console.WriteLine("Не удалось войти в систему, проверьте данные для входа или попробуйте еще раз.\n" + exc.Message);
+                    }
+                    
+                }
 	    }
     
 }

@@ -187,21 +187,7 @@ public class RussianLaunchMethod
                   
 			    }
                 
-                try
-                {
-                    var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
-                    if (sid.Equals("BAD"))
-                        return;
-
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, 1, dx11, expansionLevel, isSteam, region);
-
-
-
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine("Не удалось войти в систему, проверьте данные для входа или попробуйте еще раз .\n" + exc.Message);
-                }
+                LogicLaunchRnorm(gamePath,username,password,otp ,language , expansionLevel  ,region,isSteam ,dx11);
                 Console.ReadLine();
             }
             else

@@ -187,21 +187,7 @@ public class GermanLaunchMethod
                   twxx.Close();
                   
 			    }
-                try
-                {
-                    var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
-                    if (sid.Equals("BAD"))
-                        return;
-
-                    var ffxivGame = networklogic.LaunchGame(gamePath, sid, language, dx11, expansionLevel, isSteam , region);
-
-
-
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine("Die Anmeldung ist fehlgeschlagen, überprüfen Sie Ihre Anmeldeinformationen oder versuchen Sie es erneut. \n" + exc.Message);
-                }
+                LogicLaunchNorm(gamePath,username,password,otp ,language , expansionLevel  ,region,isSteam ,dx11);
                 Console.ReadLine();
             }
             else
