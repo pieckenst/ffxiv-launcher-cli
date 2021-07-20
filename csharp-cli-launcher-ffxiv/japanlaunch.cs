@@ -1,24 +1,22 @@
 ﻿using System;
 using static networklogic;
+using static LaunchMethods;
 using csharp_cli_launcher_ffxiv;
 using System.IO;
 
 /// <summary>
-/// Basically a class for launch sequence of the launcher
+/// Japan Launch Logic
 /// </summary>
-public class LaunchMethods
+public class JapaneseLaunchMethod
 {
-	
-        
-
-        public static void EnglishLaunch(int language)
+	public static void JapanLaunch(int language)
         {
             Console.WriteLine("-------------------------------------");
-            Console.WriteLine("What would you like to do?");
-            Console.WriteLine("  1) Login");
-            Console.WriteLine("  2) Exit");
+            Console.WriteLine("何をしたいですか? ");
+            Console.WriteLine("  1) ログイン ");
+            Console.WriteLine("  2) 出口");
 
-            Console.Write("Input - ");
+            Console.Write("入力 - ");
             var ansys = Console.ReadKey();
             Console.WriteLine();
             Console.WriteLine("-------------------------------------");
@@ -37,7 +35,7 @@ public class LaunchMethods
                 }
                 else
 			    {
-                  Console.Write("Please enter your gamepath - ");
+                  Console.Write("ゲームパスを入力してください - ");
                   gamePath = Console.ReadLine();
                   TextWriter tw = new StreamWriter("gamepath.txt");
                   tw.WriteLine(gamePath);
@@ -45,7 +43,7 @@ public class LaunchMethods
 			    }
                 Console.WriteLine("-------------------------------------");
                 bool isSteam = false;
-                Console.Write("Is your game a steam version of the client? - ");
+                Console.Write("あなたのゲームはクライアントのSteamバージョンですか? - ");
                 string promtw = Console.ReadLine();
                 if (promtw.ToLower() == "yes")
                 {
@@ -56,7 +54,6 @@ public class LaunchMethods
                     isSteam = false;
                 }
                 Console.WriteLine("-------------------------------------");
-                
                 string username;
                 
                 //Console.WriteLine("Provided username {0}", username);
@@ -64,7 +61,7 @@ public class LaunchMethods
                 string password;
                 if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
                   bool promter = false;
-                  Console.Write("Do you wish to use existing saved login and password? - ");
+                  Console.Write("保存されている既存のログインとパスワードを使用しますか? - ");
                   string askaway = Console.ReadLine();
                   if (askaway.ToLower() == "yes")
                   {
@@ -83,20 +80,20 @@ public class LaunchMethods
                   }
                   else
 				  {
-                    Console.Write("Username - ");
+                    Console.Write("ユーザーID - ");
                     username = Console.ReadLine();
-                    Console.Write("Password - ");
+                    Console.Write("パスワード - ");
                     password = Program.ReadPassword();
                   }
                 }
                 else
 			    {
-                  Console.Write("Username - ");
+                  Console.Write("ユーザーID - ");
                   username = Console.ReadLine();
                   TextWriter twx = new StreamWriter("username.txt");
                   twx.WriteLine(username);
                   twx.Close();
-                  Console.Write("Password - ");
+                  Console.Write("パスワード - ");
                   password = Program.ReadPassword();
                   TextWriter tw = new StreamWriter("password.txt");
                   tw.WriteLine(password);
@@ -112,7 +109,7 @@ public class LaunchMethods
                 //Console.Write("Your Password is:" + maskpassword);
                 Console.WriteLine();
 
-                Console.Write("Two-Factor Authefication Key - ");
+                Console.Write("2要素認証キ - ");
                 string otp = Console.ReadLine();
                 string dx1prompt;
                 bool dx11 = false;
@@ -121,7 +118,7 @@ public class LaunchMethods
                 if (File.Exists(Directory.GetCurrentDirectory() + @"\booleansandvars.txt"))
 			    {
                    bool promterx = false;
-                   Console.Write("Do you wish to load existing params? - ");
+                   Console.Write("既存のパラメータをロードしますか? - ");
                    string askawayx = Console.ReadLine();
                    if (askawayx.ToLower() == "yes")
                    {
@@ -151,7 +148,7 @@ public class LaunchMethods
                    }
                    else
 				   {
-                     Console.Write("Do you want to launch the game with enabled DirectX 11? - ");
+                     Console.Write("DirectX11を有効にしてゲームを起動しますか? - ");
                      dx1prompt = Console.ReadLine();
                      if (dx1prompt.ToLower() == "yes")
                      {
@@ -161,15 +158,15 @@ public class LaunchMethods
 			         {
                      dx11 = false; 
 			         }
-                     Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                     Console.WriteLine("拡張パックのレベルを入力してください-ここに現在利用可能で有効なものがあります \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
                      expansionLevel = int.Parse(Console.ReadLine());
-                     Console.Write("Please provide a region for your client install - Currently valid ones are \n 1- Japan , 2 - America , 3 - International: - ");
+                     Console.Write("クライアントインストール用のリージョンを指定してください-現在有効なリージョンは次のとおりです \n 1-日本、2-アメリカ、3-国際: - ");
                      region = int.Parse(Console.ReadLine());
 				   }
 			    }
                 else
 			    {
-                  Console.Write("Do you want to launch the game with enabled DirectX 11? - ");
+                  Console.Write("DirectX11を有効にしてゲームを起動しますか? - ");
                   dx1prompt = Console.ReadLine();
                   if (dx1prompt.ToLower() == "yes")
                   {
@@ -179,10 +176,10 @@ public class LaunchMethods
 			      {
                     dx11 = false; 
 			      }
-                  Console.WriteLine("Please enter your expansion pack level - Currently valid ones are \n 0- ARR - 1 - Heavensward - 2 - Stormblood - 3 - Shadowbringers");
+                  Console.WriteLine("拡張パックのレベルを入力してください-ここに現在利用可能で有効なものがあります \n 0-ARR-1-ヘブンスワード-2-ストームブラッド-3-シャドウブリンガー");
                   expansionLevel = int.Parse(Console.ReadLine());
                   TextWriter twxx = new StreamWriter("booleansandvars.txt");
-                  Console.Write("Please provide a region for your client install - Currently valid ones are \n 1- Japan , 2 - America , 3 - International: - ");
+                  Console.Write("クライアントインストール用のリージョンを指定してください-現在有効なリージョンは次のとおりです \n 1-日本、2-アメリカ、3-国際: - ");
                   region = int.Parse(Console.ReadLine());
                   twxx.WriteLine(dx1prompt);
                   twxx.WriteLine(expansionLevel);
@@ -190,9 +187,6 @@ public class LaunchMethods
                   twxx.Close();
                   
 			    }
-                
-                
-                
                 try
                 {
                     var sid = networklogic.GetRealSid(gamePath, username, password, otp, isSteam);
@@ -206,26 +200,16 @@ public class LaunchMethods
                 }
                 catch (Exception exc)
                 {
-                    Console.WriteLine("Logging in failed, check your login information or try again.\n" + exc.Message);
+                    Console.WriteLine("ログインに失敗しました。ログイン情報を確認するか、再試行してください.\n" + exc.Message);
                 }
                 Console.ReadLine();
             }
             else
             {
                 Console.WriteLine("-------------------------------------");
-                Console.WriteLine("Exiting the launcher");
+                Console.WriteLine("ランチャーを終了する");
                 Console.WriteLine("-------------------------------------");
                 Console.ReadLine();
             }
         }
-
-        public static string ReturnUsername()
-	    {
-           TextReader trx = new StreamReader("username.txt");
-           string usernameread = trx.ReadLine();
-           string username = usernameread;
-           trx.Close();
-           return username;
-	    }
-    
 }

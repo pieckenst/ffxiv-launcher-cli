@@ -83,7 +83,7 @@ namespace csharp_cli_launcher_ffxiv
 
             if (language == 0)
             {
-                LaunchMethods.JapanLaunch(language);
+                JapaneseLaunchMethod.JapanLaunch(language);
             }
 
             if (language == 1)
@@ -93,16 +93,16 @@ namespace csharp_cli_launcher_ffxiv
 
             if (language == 2)
             {
-                LaunchMethods.GermanLaunch(language);
+                GermanLaunchMethod.GermanLaunch(language);
             }
 
             if (language == 3)
             {
-                LaunchMethods.FrenchLaunch(language);
+                FrenchLaunchMethod.FrenchLaunch(language);
             }
             if (language == 4)
             {
-                LaunchMethods.RussianLaunch(language);
+                RussianLaunchMethod.RussianLaunch(language);
             }
 
 
