@@ -85,15 +85,9 @@ public class LaunchMethods
                 else
 			    {
                   Console.Write("Username - ");
-                  username = Console.ReadLine();
-                  TextWriter twx = new StreamWriter("username.txt");
-                  twx.WriteLine(username);
-                  twx.Close();
+                  username = UserNameWrite();
                   Console.Write("Password - ");
-                  password = Program.ReadPassword();
-                  TextWriter tw = new StreamWriter("password.txt");
-                  tw.WriteLine(password);
-                  tw.Close();
+                  password = PasswordWrite();
 
                 }
                 //string maskpassword = "";
@@ -317,5 +311,21 @@ public class LaunchMethods
           int region =  int.Parse(regionreader);
           tr.Close();
           return region;
+	    }
+        public static string UserNameWrite()
+	    {
+          string username = Console.ReadLine();
+          TextWriter twx = new StreamWriter("username.txt");
+          twx.WriteLine(username);
+          twx.Close();
+          return username;
+	    }
+        public static string PasswordWrite()
+	    {
+          string password = Program.ReadPassword();
+          TextWriter tw = new StreamWriter("password.txt");
+          tw.WriteLine(password);
+          tw.Close();
+          return password;
 	    }
 }

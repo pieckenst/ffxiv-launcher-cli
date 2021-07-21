@@ -82,15 +82,9 @@ public class GermanLaunchMethod
                 else
 			    {
                   Console.Write("Nutzername - ");
-                  username = Console.ReadLine();
-                  TextWriter twx = new StreamWriter("username.txt");
-                  twx.WriteLine(username);
-                  twx.Close();
+                  username = UserNameWrite();
                   Console.Write("Passwort - ");
-                  password = Program.ReadPassword();
-                  TextWriter tw = new StreamWriter("password.txt");
-                  tw.WriteLine(password);
-                  tw.Close();
+                  password = PasswordWrite();
 
                 }
                 //string maskpassword = "";

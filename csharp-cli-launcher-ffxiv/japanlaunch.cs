@@ -82,15 +82,9 @@ public class JapaneseLaunchMethod
                 else
 			    {
                   Console.Write("ユーザーID - ");
-                  username = Console.ReadLine();
-                  TextWriter twx = new StreamWriter("username.txt");
-                  twx.WriteLine(username);
-                  twx.Close();
+                  username = UserNameWrite();
                   Console.Write("パスワード - ");
-                  password = Program.ReadPassword();
-                  TextWriter tw = new StreamWriter("password.txt");
-                  tw.WriteLine(password);
-                  tw.Close();
+                  password = PasswordWrite();
 
                 }
                 //string maskpassword = "";

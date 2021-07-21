@@ -81,15 +81,9 @@ public class RussianLaunchMethod
                 else
 			    {
                   Console.Write("Имя Пользователя - ");
-                  username = Console.ReadLine();
-                  TextWriter twx = new StreamWriter("username.txt");
-                  twx.WriteLine(username);
-                  twx.Close();
+                  username = UserNameWrite();
                   Console.Write("Пароль - ");
-                  password = Program.ReadPassword();
-                  TextWriter tw = new StreamWriter("password.txt");
-                  tw.WriteLine(password);
-                  tw.Close();
+                  password = PasswordWrite();
 
                 }
                 //string maskpassword = "";
