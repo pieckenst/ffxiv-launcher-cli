@@ -51,7 +51,8 @@ public class RussianLaunchMethod
                 //Console.WriteLine("Provided username {0}", username);
                 
                 string password;
-                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") || File.Exists(Directory.GetCurrentDirectory() + @"\password.XIVloadEnc") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt"))
+            {
                   bool promter = false;
                   Console.Write("Хотите ли вы использовать сохраненные имя пользователя и пароль? - ");
                   string askaway = Console.ReadLine();
@@ -65,11 +66,13 @@ public class RussianLaunchMethod
                   }
                   if (promter == true) {
                     username = ReturnUsername();
-                    TextReader tr = new StreamReader("password.txt");
-                    string passwordread = tr.ReadLine();
-                    password = passwordread;
-                    tr.Close();
-                  }
+                    TextReader tr = new StreamReader("privatekey.txt");
+                    string keyread = tr.ReadLine();
+                    DecryptFile("password.XIVloadEnc", "password.txt", keyread);
+                    TextReader prr = new StreamReader("password.txt");
+                    password = prr.ReadLine();
+                    prr.Close();
+                }
                   else
 				  {
                     Console.Write("Имя Пользователя - ");
@@ -168,8 +171,9 @@ public class RussianLaunchMethod
                   twxx.Close();
                   
 			    }
-                
+                File.Delete("password.txt");
                 LogicLaunchRnorm(gamePath,username,password,otp ,language , expansionLevel  ,region,isSteam ,dx11);
+                
                 Console.ReadLine();
             }
             else

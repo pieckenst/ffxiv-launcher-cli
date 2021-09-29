@@ -60,7 +60,7 @@ public class LaunchMethods
                 //Console.WriteLine("Provided username {0}", username);
                 
                 string password;
-                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") || File.Exists(Directory.GetCurrentDirectory() + @"\password.XIVloadEnc") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
                   bool promter = false;
                   Console.Write("Do you wish to use existing saved login and password? - ");
                   string askaway = Console.ReadLine();
@@ -74,10 +74,12 @@ public class LaunchMethods
                   }
                   if (promter == true) {
                     username = ReturnUsername();
-                    TextReader tr = new StreamReader("password.txt");
-                    string passwordread = tr.ReadLine();
-                    password = passwordread;
-                    tr.Close();
+                    TextReader tr = new StreamReader("privatekey.txt");
+                    string keyread = tr.ReadLine();
+                    DecryptFile("password.XIVloadEnc","password.txt", keyread);
+                    TextReader prr = new StreamReader("password.txt");
+                    password = prr.ReadLine();
+                    prr.Close();
                 }
                   else
 				  {
@@ -85,7 +87,10 @@ public class LaunchMethods
                     username = Console.ReadLine();
                     Console.Write("Password - ");
                     password = Program.ReadPassword();
-                  }
+                    //string key = GenerateKey();
+
+                    //EncryptFile("password.txt", "password.XIVloadEnc", key);
+                }
                 }
                 else
 			    {
@@ -93,8 +98,12 @@ public class LaunchMethods
                   username = UserNameWrite();
                   Console.Write("Password - ");
                   password = PasswordWrite();
+                  string key = GenerateKey();
+                  
 
-                }
+                  EncryptFile("password.txt", "password.XIVloadEnc", key);
+
+            }
                 //string maskpassword = "";
                 //for (int i = 0; i < password.Length; i++) { 
                 //maskpassword += "*"; 
@@ -177,8 +186,11 @@ public class LaunchMethods
                   twxx.Close();
                   
 			    }
+                File.Delete("password.txt");
                 LogicLaunchNorm(gamePath,username,password,otp ,language , expansionLevel  ,region,isSteam ,dx11);
+                
                 Console.ReadLine();
+                
             }
             else
             {
@@ -328,13 +340,11 @@ public class LaunchMethods
         public static string PasswordWrite()
 	    {
           string password = Program.ReadPassword();
-          string filnamex = "C:\\password.txt";
+          string filnamex = "password.txt";
           TextWriter tw = new StreamWriter(filnamex);
           tw.WriteLine(password);
           tw.Close();
-          string key = GenerateKey();
           
-          EncryptFile(filnamex, "C:\\password.XIVloadEnc", key);
           
           return password;
 	    }
@@ -343,11 +353,16 @@ public class LaunchMethods
           // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
           DES desCrypto = DESCryptoServiceProvider.Create();
 
-          // Use the Automatically generated key for Encryption. 
+        // Use the Automatically generated key for Encryption.
+          byte[] proxy = desCrypto.Key;
+          Console.WriteLine(ASCIIEncoding.ASCII.GetString(desCrypto.Key));
+          //string SaverKey = System.Text.ASCIIEncoding.Default.GetString(proxy);
+
+          File.WriteAllBytes("privatekey.txt", proxy);
           return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
         }
 
-        static void EncryptFile(string sInputFilename,
+        public static void EncryptFile(string sInputFilename,
          string sOutputFilename,
          string sKey)
         {
@@ -370,12 +385,14 @@ public class LaunchMethods
           fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
           cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
           cryptostream.Close();
+          
           fsInput.Close();
           
           fsEncrypted.Close();
+          File.Delete(sInputFilename);
         }
 
-        static void DecryptFile(string sInputFilename,
+        public static void DecryptFile(string sInputFilename,
           string sOutputFilename,
           string sKey)
         {
@@ -400,8 +417,8 @@ public class LaunchMethods
           //Print the contents of the decrypted file.
           StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
           fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
-          fsDecrypted.Flush();
+          //fsDecrypted.Flush();
           fsDecrypted.Close();
-    }
+        }
 
 }

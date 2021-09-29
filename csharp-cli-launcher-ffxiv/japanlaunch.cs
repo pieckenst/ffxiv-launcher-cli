@@ -52,7 +52,8 @@ public class JapaneseLaunchMethod
                 //Console.WriteLine("Provided username {0}", username);
                 
                 string password;
-                if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt")) {
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\password.txt") || File.Exists(Directory.GetCurrentDirectory() + @"\password.XIVloadEnc") && File.Exists(Directory.GetCurrentDirectory() + @"\username.txt"))
+            {
                   bool promter = false;
                   Console.Write("保存されている既存のログインとパスワードを使用しますか? - ");
                   string askaway = Console.ReadLine();
@@ -66,11 +67,13 @@ public class JapaneseLaunchMethod
                   }
                   if (promter == true) {
                     username = ReturnUsername();
-                    TextReader tr = new StreamReader("password.txt");
-                    string passwordread = tr.ReadLine();
-                    password = passwordread;
-                    tr.Close();
-                  }
+                    TextReader tr = new StreamReader("privatekey.txt");
+                    string keyread = tr.ReadLine();
+                    DecryptFile("password.XIVloadEnc", "password.txt", keyread);
+                    TextReader prr = new StreamReader("password.txt");
+                    password = prr.ReadLine();
+                    prr.Close();
+                }
                   else
 				  {
                     Console.Write("ユーザーID - ");
@@ -169,7 +172,8 @@ public class JapaneseLaunchMethod
                   twxx.Close();
                   
 			    }
-                LogicLaunchNorm(gamePath,username,password,otp ,language , expansionLevel  ,region,isSteam ,dx11);
+                File.Delete("password.txt");
+                LogicLaunchRnorm(gamePath, username, password, otp, language, expansionLevel, region, isSteam, dx11);
                 Console.ReadLine();
             }
             else
