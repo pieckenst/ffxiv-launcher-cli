@@ -328,47 +328,80 @@ public class LaunchMethods
         public static string PasswordWrite()
 	    {
           string password = Program.ReadPassword();
-          TextWriter tw = new StreamWriter("password.txt");
-          byte[] key = Enumerable.Range(0, 32).Select(x => (byte)x).ToArray();
+          string filnamex = "C:\\password.txt";
+          TextWriter tw = new StreamWriter(filnamex);
           tw.WriteLine(password);
           tw.Close();
-          EncryptFile("password.txt","password.XIVloadEnc" ,key);
+          string key = GenerateKey();
+          
+          EncryptFile(filnamex, "C:\\password.XIVloadEnc", key);
           
           return password;
 	    }
-        private static void EncryptFile(string path, string encfileName , byte[] key)
+        static string GenerateKey()
         {
-          
-          using (FileStream fsSrc = File.OpenRead(path))
-          using (AesManaged aes = new AesManaged() { Key = key })
-          using (FileStream fsDst = File.Create(encfileName))
-          {
-            fsDst.Write(aes.IV);
-            using (CryptoStream cs = new CryptoStream(fsDst, aes.CreateEncryptor(), CryptoStreamMode.Write, true))
-            {
-                fsSrc.CopyTo(cs);
-            }
-          }
-          //File.Delete(path);
-          File.Move(encfileName, path);
+          // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
+          DES desCrypto = DESCryptoServiceProvider.Create();
+
+          // Use the Automatically generated key for Encryption. 
+          return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
         }
 
-        private static void DecryptFile(string path,string encfileName, byte[] key)
+        static void EncryptFile(string sInputFilename,
+         string sOutputFilename,
+         string sKey)
         {
+          FileStream fsInput = new FileStream(sInputFilename,
+           FileMode.Open,
+           FileAccess.ReadWrite);
+
+          FileStream fsEncrypted = new FileStream(sOutputFilename,
+           FileMode.Create,
+           FileAccess.ReadWrite);
+          DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+          DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+          DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+          ICryptoTransform desencrypt = DES.CreateEncryptor();
+          CryptoStream cryptostream = new CryptoStream(fsEncrypted,
+           desencrypt,
+           CryptoStreamMode.Write);
+
+          byte[] bytearrayinput = new byte[fsInput.Length];
+          fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
+          cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
+          cryptostream.Close();
+          fsInput.Close();
           
-          using (FileStream fsSrc = File.OpenRead(encfileName))
-          {
-            byte[] iv = new byte[16];
-            fsSrc.Read(iv);
-            using (AesManaged aes = new AesManaged() { Key = key, IV = iv })
-            using (CryptoStream cs = new CryptoStream(fsSrc, aes.CreateDecryptor(), CryptoStreamMode.Read, true))
-            using (FileStream fsDst = File.Create(path))
-            {
-                cs.CopyTo(fsDst);
-            }
-          }
-          //File.Delete(path);
-          File.Move(encfileName, path);
+          fsEncrypted.Close();
         }
+
+        static void DecryptFile(string sInputFilename,
+          string sOutputFilename,
+          string sKey)
+        {
+          DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+          //A 64 bit key and IV is required for this provider.
+          //Set secret key For DES algorithm.
+          DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+          //Set initialization vector.
+          DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+
+          //Create a file stream to read the encrypted file back.
+          FileStream fsread = new FileStream(sInputFilename,
+           FileMode.Open,
+           FileAccess.Read);
+          //Create a DES decryptor from the DES instance.
+          ICryptoTransform desdecrypt = DES.CreateDecryptor();
+          //Create crypto stream set to read and do a 
+          //DES decryption transform on incoming bytes.
+          CryptoStream cryptostreamDecr = new CryptoStream(fsread,
+           desdecrypt,
+           CryptoStreamMode.Read);
+          //Print the contents of the decrypted file.
+          StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
+          fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
+          fsDecrypted.Flush();
+          fsDecrypted.Close();
+    }
 
 }
