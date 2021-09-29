@@ -13,3 +13,19 @@ C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launche
 C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\xivloader.dll
 C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\ref\xivloader.dll
 C:\Users\Andrey Savich\source\repos\csharp-cli-launcher-ffxiv\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\xivloader.pdb
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\xivloader.exe
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\xivloader.deps.json
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\xivloader.runtimeconfig.json
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\xivloader.dll
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\ref\xivloader.dll
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\bin\Debug\net6.0\xivloader.pdb
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.csproj.AssemblyReference.cache
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.AssemblyInfoInputs.cache
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.AssemblyInfo.cs
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.ImplicitNamespaceImports.cs
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.csproj.CoreCompileInputs.cache
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\xivloader.dll
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\ref\xivloader.dll
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\xivloader.pdb
+D:\git\ffxivlauncher-XIVLoader\csharp-cli-launcher-ffxiv\obj\Debug\net6.0\csharp-cli-launcher-ffxiv.genruntimeconfig.cache

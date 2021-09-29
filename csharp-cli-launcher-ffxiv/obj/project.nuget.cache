@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wZ/sXKnnC8iC0QhILps9bnl9myxctp29Sn2kkfpzemTOtCys4bY6n6o9ouPWybAEe1ZAn+GUFW+NrQvz+9ofUQ==",
+  "dgSpecHash": "tIabOnLCC6kiYmxp8bFdvlGpQhXDJVXWIDpTgaZJCHXpuFXRMQoalFjJjUWMOVwOAci2bTMHkgAL2obHeQoE1A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Andrey Savich\\source\\repos\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv.csproj",
+  "projectFilePath": "D:\\git\\ffxivlauncher-XIVLoader\\csharp-cli-launcher-ffxiv\\csharp-cli-launcher-ffxiv.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -2,6 +2,11 @@
 using static networklogic;
 using csharp_cli_launcher_ffxiv;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Security;
+using System.Security.Cryptography;
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// Basically a class for launch sequence of the launcher
@@ -73,7 +78,7 @@ public class LaunchMethods
                     string passwordread = tr.ReadLine();
                     password = passwordread;
                     tr.Close();
-                  }
+                }
                   else
 				  {
                     Console.Write("Username - ");
@@ -324,8 +329,46 @@ public class LaunchMethods
 	    {
           string password = Program.ReadPassword();
           TextWriter tw = new StreamWriter("password.txt");
+          byte[] key = Enumerable.Range(0, 32).Select(x => (byte)x).ToArray();
           tw.WriteLine(password);
           tw.Close();
+          EncryptFile("password.txt","password.XIVloadEnc" ,key);
+          
           return password;
 	    }
+        private static void EncryptFile(string path, string encfileName , byte[] key)
+        {
+          
+          using (FileStream fsSrc = File.OpenRead(path))
+          using (AesManaged aes = new AesManaged() { Key = key })
+          using (FileStream fsDst = File.Create(encfileName))
+          {
+            fsDst.Write(aes.IV);
+            using (CryptoStream cs = new CryptoStream(fsDst, aes.CreateEncryptor(), CryptoStreamMode.Write, true))
+            {
+                fsSrc.CopyTo(cs);
+            }
+          }
+          //File.Delete(path);
+          File.Move(encfileName, path);
+        }
+
+        private static void DecryptFile(string path,string encfileName, byte[] key)
+        {
+          
+          using (FileStream fsSrc = File.OpenRead(encfileName))
+          {
+            byte[] iv = new byte[16];
+            fsSrc.Read(iv);
+            using (AesManaged aes = new AesManaged() { Key = key, IV = iv })
+            using (CryptoStream cs = new CryptoStream(fsSrc, aes.CreateDecryptor(), CryptoStreamMode.Read, true))
+            using (FileStream fsDst = File.Create(path))
+            {
+                cs.CopyTo(fsDst);
+            }
+          }
+          //File.Delete(path);
+          File.Move(encfileName, path);
+        }
+
 }
