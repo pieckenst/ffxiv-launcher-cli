@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {
+  },
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "SwiftyXIVLoader/1.0.0": {
+        "dependencies": {
+        },
+        "runtime": {
+          "SwiftyXIVLoader.dll": {
+          },
+          "Echoes.dll": {
+          },
+          "Silver.dll": {
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SwiftyXIVLoader/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Echoes": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Silver": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
